@@ -3,6 +3,7 @@ import numpy as np
 from sklearn import svm,metrics
 from sklearn import neighbors
 from sklearn.linear_model.stochastic_gradient import SGDClassifier
+from sklearn.ensemble import RandomForestClassifier
 
 def images2Vector(filePath):
 	imageVector=[]
@@ -48,6 +49,14 @@ def getSGDClassifier(X,Y):
 	sgdclassifier.fit(X,Y)
 
 	return sgdclassifier
+
+def getRFClassifier(X,Y):
+	#The classifier with default parameters give around Accuracy = 0.942500
+	rfclassifier = RandomForestClassifier(n_estimators=100, max_depth=None,min_samples_split=1, random_state=1)
+	print "[RF Classifier] train on full data...-> 42k samples"
+	rfclassifier.fit(X,Y)
+
+	return rfclassifier
 
 
 def writePredictions(filePath, predicted):
@@ -107,14 +116,19 @@ if __name__ == "__main__":
 	#printStats(knn_classifier, predicted, expected)
 
 	testdata = loadTestData('./../kgg/test.csv')
-	sgd_classifier = getSGDClassifier(digits,labels)
+	#sgd_classifier = getSGDClassifier(digits,labels)
 
 	print "test on remaining half data..."
-	predicted = sgd_classifier.predict(testdata)
+	#predicted = sgd_classifier.predict(testdata)
 
 	#printStats(sgd_classifier, predicted, expected)
 
 
 	#testdata = loadTestData('./../kgg/test.csv')
 	#predicted = sgd_classifier.predict(testdata)
-	writePredictions('./predictions_sgd', predicted)
+	#writePredictions('./predictions_sgd', predicted)
+
+
+	rf_classifier = getRFClassifier(digits,labels)
+	predicted = rf_classifier.predict(testdata)
+	writePredictions('./predictions_rf', predicted)
