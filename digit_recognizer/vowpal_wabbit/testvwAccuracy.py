@@ -3,6 +3,8 @@ import csv
 
 f_pred = file('./prediction', 'rb')
 
+#prediction is compared with knn benchmakr wich is around 97% correc
+#note, we are not comparing with the actual or 100% corrct benchmark
 f_benchmark = file('./knn_benchmark.csv', 'rb')
 f_benchmark.readline()
 
