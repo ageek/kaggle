@@ -43,7 +43,7 @@ def getLinearSVMClassifier(X,Y):
 	return svmclassifier
 
 def getSGDClassifier(X,Y):
-	sgdclassifier = SGDClassifier()
+	sgdclassifier = SGDClassifier(loss='log', penalty='l1', n_iter=10, shuffle=True,random_state=0)
 	print "[SGD Classifier] train on full data...-> 42k samples"
 	sgdclassifier.fit(X,Y)
 
@@ -83,7 +83,7 @@ if __name__ == "__main__":
 
 
 	#initially try on a small set of data
-	fPath = "./../kgg/train_5000.csv"
+	fPath = "./../kgg/train.csv"
 	digits, labels = images2Vector(fPath)
 
 	# create a SVM classifier
@@ -100,19 +100,21 @@ if __name__ == "__main__":
 	n_samples = len(digits)
 	#now do prediction for the remaining data
 	#knn_classifier = getKNNClassifier(digits, labels)
-	print "test on remaining half data..."
 	expected = labels[n_samples/2:]
 	#predicted = knn_classifier.predict(digits[n_samples/2:])
 	#writePredictions('./predictions_knn', predicted)
 	
 	#printStats(knn_classifier, predicted, expected)
 
+	testdata = loadTestData('./../kgg/test.csv')
 	sgd_classifier = getSGDClassifier(digits,labels)
-	#predicted = sgd_classifier.predict(digits[n_samples/2:])
+
+	print "test on remaining half data..."
+	predicted = sgd_classifier.predict(testdata)
 
 	#printStats(sgd_classifier, predicted, expected)
 
 
-	testdata = loadTestData('./../kgg/test.csv')
-	predicted = sgd_classifier.predict(testdata)
+	#testdata = loadTestData('./../kgg/test.csv')
+	#predicted = sgd_classifier.predict(testdata)
 	writePredictions('./predictions_sgd', predicted)
