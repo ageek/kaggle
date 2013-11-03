@@ -1,0 +1,86 @@
+1. You can directly run vw from zcat output as below:
+ubuntu@ip-10-141-165-48:/devSOLR-Crawler/img/kaggle/digit_recognizer/vowpal_wabbit$ zcat vw-train-all-42k.vw.tar.gz |vw --oaa 10 --passes 100 -q DD -c -f digits.model
+creating quadratic features for pairs: DD
+final_regressor = digits.model
+Num weight bits = 18
+learning rate = 0.5
+initial_t = 0
+power_t = 0.5
+decay_learning_rate = 1
+creating cache_file = .cache
+Reading datafile =
+num sources = 1
+average    since         example     example  current  current  current
+loss       last          counter      weight    label  predict features
+malformed example!
+words.size() = 3
+0.666667   0.666667          3      3.0          1       10       81
+0.500000   0.333333          6      6.0         10       10      152
+0.727273   1.000000         11     11.0          8        3      233
+0.681818   0.636364         22     22.0          6       10      184
+0.590909   0.500000         44     44.0          4        4      176
+0.505747   0.418605         87     87.0          9        9      146
+0.436782   0.367816        174    174.0          7        3      118
+0.327586   0.218391        348    348.0          5       10      168
+
+
+OR
+
+unzip the data and pass it as below
+vw --data vwdata.vw --oaa 10 --passes 100 -q DD --cache_file vwdata.cache -f digits.model
+creating quadratic features for pairs: DD
+final_regressor = digits.model
+Num weight bits = 18
+learning rate = 0.5
+initial_t = 0
+power_t = 0.5
+decay_learning_rate = 1
+using cache_file = vwdata.cache
+ignoring text input in favor of cache input
+num sources = 1
+average    since         example     example  current  current  current
+loss       last          counter      weight    label  predict features
+0.333333   0.333333          3      3.0          1        1       81
+0.333333   0.333333          6      6.0         10       10      152
+0.636364   1.000000         11     11.0          8        3      233
+0.636364   0.636364         22     22.0          6       10      184
+0.590909   0.545455         44     44.0          4        4      176
+0.494253   0.395349         87     87.0          9        9      146
+0.425287   0.356322        174    174.0          7        3      118
+0.318966   0.212644        348    348.0          5       10      168
+0.261494   0.204023        696    696.0          7        7      166
+0.205460   0.149425       1392   1392.0          6        6      149
+0.158046   0.110632       2784   2784.0         10       10      170
+0.124641   0.091236       5568   5568.0          8        8      195
+0.096991   0.069337      11135  11135.0          8        8      129
+0.073286   0.049578      22269  22269.0          8        8      180
+0.051912   0.030537      44537  44537.0          2        2      190
+0.033961   0.016010      89073  89073.0          3        3      192
+0.020556   0.007151     178146 178146.0          4        4      103
+0.011833   0.003110     356291 356291.0          8        8      136
+0.006389   0.000946     712582 712582.0          3        3      124
+
+finished run
+number of examples = 1000000
+weighted example sum = 1e+06
+weighted label sum = 0
+average loss = 0.004697
+best constant = 0
+total feature number = 153074000
+
+
+2. cat vwdata-test-28k.vw |vw -t  -i digits.model -p prediction
+	using zcat is adding some junk char in predictions file at the end,  and causing issues while checking accuracy
+
+3: format the result file as per submission benchmark
+ 3.1. replace 10 with 0, convert flot to int: 
+	cat prediction|cut -d'.' -f1|sed 's/10/0/' >prediction_final
+ 3.1. add linenum and , to each entry: 
+	 nl -ba -w 1 -s ',' predictions_final > predictions_final_linenum
+
+ 3.
+
+	 OR
+
+	All in one step: 
+		 cat prediction|cut -d'.' -f1|sed 's/10/0/' |nl -ba -w1 -s',' >predictions_final_linenum

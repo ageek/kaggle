@@ -1,0 +1,19 @@
+I'm trying to train an L2-regularized L1-hinge loss SVM using vowpal-wabbit.
+
+I use the following commands to train and test on the splice dataset:
+
+time vw --passes 10 -c --loss_function hinge -f model.txt -d train_vw.txt --l1 0 --l2 1
+time vw -t -i model.txt -p out.txt -d test_vw.txt
+perf -ACC -files test.labels out.txt -t 0.5
+The result is an accuracy of 48%, which is terrible! On splice, other SVMs, eg liblinear, give about 84% accuracy.
+
+If I remove the --l2 1 bit, or reduce it to --l2 0.001 or so, then I get ok-ish accuracy, at least 81% or so. I'm expecting that the --l2 parameter is equivalent to the C parameter of other SVMs. Am I wrong? If so, what is the relationship between the --l2 parameter and the standard C SVM parameter?
+
+Full details of code used:
+
+cat train_svmlight.txt | sed -e "s/^+1 /1 |f /" | sed -e "s/^-1 /-1 |f /" > train_vw.txt
+cat test_svmlight.txt | sed -e "s/^+1 /1 |f /" | sed -e "s/^-1 /-1 |f /" > test_vw.txt
+time vw --passes 10 -c --loss_function hinge -f model.txt -d train_vw.txt --l1 0 --l2 1
+time vw -t -i model.txt -p out.txt -d test_vw.txt
+cat test_vw.txt | cut -d ' ' -f 1 | sed -e 's/^-1/0/' > test.labels
+perf -ACC -files test.labels out.txt -t 0.5
