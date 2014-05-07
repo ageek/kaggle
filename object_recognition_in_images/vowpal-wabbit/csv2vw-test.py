@@ -1,6 +1,6 @@
 import csv
 
-f = file('./test_all.csv')
+f = file('././../../../cifar-10/test_all_gray_unscaled_int.csv')
 
 #f.readline()
 
@@ -19,5 +19,5 @@ for oneline in csv.reader(f):
 
 
 #write file content to vw file
-f = open('./vw-test-all.vw','w')
+f = open('./test_all_gray_unscaled_int.vw','w')
 f.write(fileData)

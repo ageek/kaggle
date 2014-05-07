@@ -1,7 +1,8 @@
 import csv
 
 imagelists=[]
-f = file('./train_all_int_label.csv', 'rb')
+#f = file('./train_all_int_label.csv', 'rb')
+f = file('./../../../cifar-10/train_all_labelled__unscaled_int_x_rf.csv', 'rb')
 
 #skip first line
 #f.readline()
@@ -26,5 +27,5 @@ for oneline in csv.reader(f):
 
 
 #write file content to vw file
-f = open('./vw-train-all.vw','w')
+f = open('./train_all_labelled__unscaled_int_x_rf.vw','w')
 f.write(fileData)
