@@ -1,0 +1,10 @@
+
+Kaggle Francais => DataScientist
+
+Modele avec location et sans location
+
+Modele avec risk_factor et sans risk_factor
+
+v0 : glm "brutal" sur with/without risk with/without location avec fonction affichage
+v1 : ajout avg cost
+v2 : test glmnet avec caret

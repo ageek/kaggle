@@ -1,0 +1,7 @@
+source(file.path("templates","load_data","load_raw_data.R"))
+source(file.path("templates","load_data","load_transition_location_F.R"))
+source(file.path("templates","load_data","load_transition_location_G.R"))
+source(file.path("templates","load_data","load_location_agg.R"))
+source(file.path("templates","load_data","load_customer_agg.R"))
+source(file.path("templates","load_data","load_glm_model_data.R"))
+source(file.path("templates","load_data","make_csv_train.R"))

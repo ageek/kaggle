@@ -1,0 +1,9 @@
+Error A :  0.07110667 
+Error B :  0.06585746 
+Error C :  0.06904411 
+Error D :  0.0504914 
+Error E :  0.06254705 
+Error F :  0.07277734 
+Error G :  0.1320552 
+Error ABCDEFG :  0.3114874 
+

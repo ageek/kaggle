@@ -1,0 +1,24 @@
+Simple sans location avec dernier point seulement
+score 2   linearsvc : 0.4097
+score 3   linearsvc : 0.5562
+score 4   linearsvc : 0.5565
+score all linearsvc : 0.6883
+
+Simple sans location avec ensemble des points
+score 2   linearsvc : 0.4097
+score 3   linearsvc : 0.5412
+score 4   linearsvc : 0.6311
+score all linearsvc : 0.6883
+
+Simple sans location:
+score 2   linearsvc : 0.4097
+score 3   linearsvc : 0.5562
+score 4   linearsvc : 0.6311
+score all linearsvc : 0.6883
+
+Cascade sans location:
+score 2   linearsvc : 0.4138
+score 3   linearsvc : 0.5563
+score 4   linearsvc : 0.6308
+score all linearsvc : 0.6882
+
