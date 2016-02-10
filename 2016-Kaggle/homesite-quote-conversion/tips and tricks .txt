@@ -1,0 +1,7 @@
+tips
+========
+@Amit You can reduce the eta to about 0.01, then run about 6000 nrounds. It's quite easy to get about 0.96840 for single model.
+
+
+After some serious feature engineering my single xgb model now yields 0.96852, which means my ensemble is not helping much
+

@@ -1,0 +1,1787 @@
+
+====linux-1
+xgb_stop_1_75k-validation_1
+param <- list(  objective           = "binary:logistic", 
+                booster = "gbtree",
+                eval_metric = "auc",
+                eta                 = 0.023, # 0.06, #0.01,
+                max_depth           = 6, #changed from default of 8
+                subsample           = 0.83, # 0.7
+                colsample_bytree    = 0.77 # 0.7
+                #num_parallel_tree   = 2
+                # alpha = 0.0001, 
+                # lambda = 1
+)
+
+clf <- xgb.train(   params              = param, 
+                    data                = dtrain, 
+                    nrounds             = 2500, 
+                    verbose             = 1,  #1
+                    #early.stop.round    = 150,
+                    watchlist           = watchlist,
+                    maximize            = FALSE
+)
+
+[2495]	val-auc:0.966501	train-auc:0.994594
+[2496]	val-auc:0.966499	train-auc:0.994601
+[2497]	val-auc:0.966499	train-auc:0.994607
+[2498]	val-auc:0.966499	train-auc:0.994613
+[2499]	val-auc:0.966507	train-auc:0.994615
+
+==================================windows-1
+
+same params with 1500 rounds  => 2500 rounds is an overfit model for this set of parameters
+
+[1491]	val-auc:0.967310	train-auc:0.984853
+[1492]	val-auc:0.967310	train-auc:0.984857
+[1493]	val-auc:0.967310	train-auc:0.984864
+[1494]	val-auc:0.967312	train-auc:0.984877
+[1495]	val-auc:0.967315	train-auc:0.984890
+[1496]	val-auc:0.967317	train-auc:0.984895
+[1497]	val-auc:0.967321	train-auc:0.984903
+[1498]	val-auc:0.967323	train-auc:0.984914
+[1499]	val-auc:0.967322	train-auc:0.984926
+   user  system elapsed 
+6616.62   14.53 1811.76
+
+
+=====windows-2
+
+with 3000 rounds
+
+
+
+====windows-3
+with base learner, eat=.02, rounds=5k
+
+[4462]	val-auc:0.966875	train-auc:0.995924
+[4463]	val-auc:0.966874	train-auc:0.995924
+[4464]	val-auc:0.966874	train-auc:0.995926
+[4465]	val-auc:0.966872	train-auc:0.995932
+
+
+
+====windows-4
+
+with base learner, eta=.01, rounds=5k
+Timing stopped at: 24293.77 41.65 6574.32
+
+
+
+[4130]	val-auc:0.967157	train-auc:0.984910
+[4135]	val-auc:0.967157	train-auc:0.984925
+[4140]	val-auc:0.967157	train-auc:0.984936
+[4145]	val-auc:0.967158	train-auc:0.984957
+[4150]	val-auc:0.967156	train-auc:0.984974
+[4155]	val-auc:0.967154	train-auc:0.984990
+[4160]	val-auc:0.967156	train-auc:0.985005
+[4165]	val-auc:0.967157	train-auc:0.985024
+[4170]	val-auc:0.967157	train-auc:0.985042
+[4175]	val-auc:0.967156	train-auc:0.985052
+[4180]	val-auc:0.967157	train-auc:0.985071
+[4185]	val-auc:0.967155	train-auc:0.985093
+[4190]	val-auc:0.967155	train-auc:0.985110
+[4195]	val-auc:0.967158	train-auc:0.985129
+[4200]	val-auc:0.967159	train-auc:0.985138
+[4205]	val-auc:0.967161	train-auc:0.985152
+[4210]	val-auc:0.967160	train-auc:0.985163
+[4215]	val-auc:0.967159	train-auc:0.985169
+[4220]	val-auc:0.967157	train-auc:0.985190
+[4225]	val-auc:0.967159	train-auc:0.985212
+[4230]	val-auc:0.967160	train-auc:0.985229
+[4235]	val-auc:0.967164	train-auc:0.985252
+[4240]	val-auc:0.967167	train-auc:0.985265
+[4245]	val-auc:0.967167	train-auc:0.985280
+[4250]	val-auc:0.967167	train-auc:0.985288
+[4255]	val-auc:0.967167	train-auc:0.985313
+[4260]	val-auc:0.967170	train-auc:0.985334
+[4265]	val-auc:0.967170	train-auc:0.985353
+[4270]	val-auc:0.967171	train-auc:0.985370
+[4275]	val-auc:0.967172	train-auc:0.985391
+[4280]	val-auc:0.967173	train-auc:0.985407
+[4285]	val-auc:0.967174	train-auc:0.985425
+[4290]	val-auc:0.967173	train-auc:0.985439
+[4295]	val-auc:0.967172	train-auc:0.985457
+[4300]	val-auc:0.967173	train-auc:0.985474
+[4305]	val-auc:0.967174	train-auc:0.985498
+[4310]	val-auc:0.967177	train-auc:0.985522
+[4315]	val-auc:0.967174	train-auc:0.985541
+[4320]	val-auc:0.967175	train-auc:0.985561
+[4325]	val-auc:0.967174	train-auc:0.985578
+[4330]	val-auc:0.967176	train-auc:0.985598
+[4335]	val-auc:0.967175	train-auc:0.985616
+[4340]	val-auc:0.967173	train-auc:0.985639
+[4345]	val-auc:0.967175	train-auc:0.985656
+[4350]	val-auc:0.967177	train-auc:0.985677
+[4355]	val-auc:0.967181	train-auc:0.985697
+[4360]	val-auc:0.967179	train-auc:0.985713
+[4365]	val-auc:0.967178	train-auc:0.985740
+[4370]	val-auc:0.967177	train-auc:0.985763
+[4375]	val-auc:0.967180	train-auc:0.985785
+[4380]	val-auc:0.967182	train-auc:0.985795
+[4385]	val-auc:0.967183	train-auc:0.985816
+[4390]	val-auc:0.967182	train-auc:0.985829
+[4395]	val-auc:0.967185	train-auc:0.985843
+[4400]	val-auc:0.967185	train-auc:0.985857
+[4405]	val-auc:0.967185	train-auc:0.985869
+[4410]	val-auc:0.967185	train-auc:0.985892
+[4415]	val-auc:0.967190	train-auc:0.985910
+[4420]	val-auc:0.967189	train-auc:0.985916
+[4425]	val-auc:0.967189	train-auc:0.985928
+[4430]	val-auc:0.967190	train-auc:0.985942
+[4435]	val-auc:0.967192	train-auc:0.985956
+[4440]	val-auc:0.967195	train-auc:0.985978
+[4445]	val-auc:0.967195	train-auc:0.985987
+[4450]	val-auc:0.967196	train-auc:0.986009
+[4455]	val-auc:0.967195	train-auc:0.986024
+[4460]	val-auc:0.967193	train-auc:0.986035
+[4465]	val-auc:0.967197	train-auc:0.986046
+[4470]	val-auc:0.967201	train-auc:0.986068
+[4475]	val-auc:0.967200	train-auc:0.986091
+[4480]	val-auc:0.967200	train-auc:0.986108
+[4485]	val-auc:0.967200	train-auc:0.986125
+[4490]	val-auc:0.967201	train-auc:0.986145
+[4495]	val-auc:0.967199	train-auc:0.986166
+[4500]	val-auc:0.967199	train-auc:0.986187
+[4505]	val-auc:0.967199	train-auc:0.986210
+[4510]	val-auc:0.967198	train-auc:0.986237
+[4515]	val-auc:0.967200	train-auc:0.986259
+[4520]	val-auc:0.967198	train-auc:0.986274
+[4525]	val-auc:0.967200	train-auc:0.986297
+[4530]	val-auc:0.967199	train-auc:0.986314
+[4535]	val-auc:0.967205	train-auc:0.986335
+[4540]	val-auc:0.967208	train-auc:0.986356
+[4545]	val-auc:0.967215	train-auc:0.986368
+[4550]	val-auc:0.967215	train-auc:0.986382
+[4555]	val-auc:0.967215	train-auc:0.986387
+[4560]	val-auc:0.967216	train-auc:0.986403
+[4565]	val-auc:0.967219	train-auc:0.986413
+[4570]	val-auc:0.967219	train-auc:0.986433
+[4575]	val-auc:0.967221	train-auc:0.986438
+[4580]	val-auc:0.967220	train-auc:0.986459
+[4585]	val-auc:0.967220	train-auc:0.986481
+[4590]	val-auc:0.967222	train-auc:0.986498
+[4595]	val-auc:0.967221	train-auc:0.986514
+[4600]	val-auc:0.967220	train-auc:0.986524
+[4605]	val-auc:0.967222	train-auc:0.986538
+[4610]	val-auc:0.967222	train-auc:0.986551
+[4615]	val-auc:0.967224	train-auc:0.986561
+[4620]	val-auc:0.967222	train-auc:0.986578
+[4625]	val-auc:0.967222	train-auc:0.986587
+[4630]	val-auc:0.967219	train-auc:0.986595
+[4635]	val-auc:0.967219	train-auc:0.986612
+[4640]	val-auc:0.967218	train-auc:0.986621
+[4645]	val-auc:0.967219	train-auc:0.986634
+[4650]	val-auc:0.967217	train-auc:0.986648
+[4655]	val-auc:0.967217	train-auc:0.986659
+[4660]	val-auc:0.967223	train-auc:0.986673
+[4665]	val-auc:0.967222	train-auc:0.986680
+[4670]	val-auc:0.967224	train-auc:0.986689
+[4675]	val-auc:0.967221	train-auc:0.986707
+[4680]	val-auc:0.967224	train-auc:0.986727
+[4685]	val-auc:0.967226	train-auc:0.986750
+[4690]	val-auc:0.967225	train-auc:0.986768
+[4695]	val-auc:0.967227	train-auc:0.986789
+[4700]	val-auc:0.967227	train-auc:0.986808
+[4705]	val-auc:0.967227	train-auc:0.986829
+[4710]	val-auc:0.967227	train-auc:0.986844
+[4715]	val-auc:0.967224	train-auc:0.986868
+[4720]	val-auc:0.967226	train-auc:0.986883
+[4725]	val-auc:0.967226	train-auc:0.986904
+[4730]	val-auc:0.967224	train-auc:0.986920
+[4735]	val-auc:0.967224	train-auc:0.986934
+[4740]	val-auc:0.967223	train-auc:0.986951
+[4745]	val-auc:0.967223	train-auc:0.986964
+[4750]	val-auc:0.967223	train-auc:0.986984
+[4755]	val-auc:0.967223	train-auc:0.986999
+[4760]	val-auc:0.967223	train-auc:0.987010
+[4765]	val-auc:0.967222	train-auc:0.987024
+[4770]	val-auc:0.967221	train-auc:0.987036
+[4775]	val-auc:0.967221	train-auc:0.987053
+[4780]	val-auc:0.967220	train-auc:0.987068
+[4785]	val-auc:0.967219	train-auc:0.987086
+[4790]	val-auc:0.967220	train-auc:0.987102
+[4795]	val-auc:0.967220	train-auc:0.987118
+[4800]	val-auc:0.967221	train-auc:0.987133
+[4805]	val-auc:0.967219	train-auc:0.987142
+[4810]	val-auc:0.967217	train-auc:0.987160
+[4815]	val-auc:0.967217	train-auc:0.987179
+[4820]	val-auc:0.967219	train-auc:0.987194
+[4825]	val-auc:0.967217	train-auc:0.987208
+[4830]	val-auc:0.967220	train-auc:0.987219
+[4835]	val-auc:0.967222	train-auc:0.987234
+[4840]	val-auc:0.967221	train-auc:0.987252
+[4845]	val-auc:0.967221	train-auc:0.987258
+[4850]	val-auc:0.967220	train-auc:0.987270
+[4855]	val-auc:0.967218	train-auc:0.987277
+[4860]	val-auc:0.967219	train-auc:0.987288
+[4865]	val-auc:0.967219	train-auc:0.987307
+[4870]	val-auc:0.967220	train-auc:0.987330
+[4875]	val-auc:0.967220	train-auc:0.987348
+[4880]	val-auc:0.967220	train-auc:0.987369
+[4885]	val-auc:0.967218	train-auc:0.987382
+[4890]	val-auc:0.967218	train-auc:0.987399
+[4895]	val-auc:0.967219	train-auc:0.987415
+[4900]	val-auc:0.967218	train-auc:0.987436
+[4905]	val-auc:0.967220	train-auc:0.987455
+[4910]	val-auc:0.967222	train-auc:0.987472
+[4915]	val-auc:0.967220	train-auc:0.987490
+[4920]	val-auc:0.967222	train-auc:0.987507
+[4925]	val-auc:0.967223	train-auc:0.987523
+[4930]	val-auc:0.967223	train-auc:0.987540
+[4935]	val-auc:0.967221	train-auc:0.987558
+[4940]	val-auc:0.967226	train-auc:0.987583
+[4945]	val-auc:0.967225	train-auc:0.987596
+[4950]	val-auc:0.967226	train-auc:0.987609
+[4955]	val-auc:0.967223	train-auc:0.987626
+[4960]	val-auc:0.967219	train-auc:0.987649
+[4965]	val-auc:0.967217	train-auc:0.987669
+[4970]	val-auc:0.967216	train-auc:0.987680
+[4975]	val-auc:0.967216	train-auc:0.987699
+[4980]	val-auc:0.967216	train-auc:0.987721
+[4985]	val-auc:0.967219	train-auc:0.987742
+[4990]	val-auc:0.967221	train-auc:0.987762
+[4995]	val-auc:0.967224	train-auc:0.987784
+    user   system  elapsed 
+27186.81    44.75  7314.67
+==> elapsed = 121 mins  =2 hrs
+public LB score: 0.96748
+
+===================10 rounds, mdepth=6 , rest params same, print.every.n=10
+[0]	val-auc:0.925810	train-auc:0.925611
+[10]	val-auc:0.928184	train-auc:0.927970
+[20]	val-auc:0.929391	train-auc:0.929218
+[30]	val-auc:0.936409	train-auc:0.936428
+[40]	val-auc:0.937884	train-auc:0.937548
+[50]	val-auc:0.938958	train-auc:0.938750
+[60]	val-auc:0.939046	train-auc:0.938900
+[70]	val-auc:0.940348	train-auc:0.940136
+[80]	val-auc:0.941351	train-auc:0.941099
+[90]	val-auc:0.942463	train-auc:0.942230
+[100]	val-auc:0.943291	train-auc:0.943206
+[110]	val-auc:0.944210	train-auc:0.944150
+[120]	val-auc:0.944794	train-auc:0.944779
+[130]	val-auc:0.945544	train-auc:0.945528
+[140]	val-auc:0.946296	train-auc:0.946253
+[150]	val-auc:0.946969	train-auc:0.946923
+[160]	val-auc:0.947440	train-auc:0.947464
+[170]	val-auc:0.947903	train-auc:0.948010
+[180]	val-auc:0.948314	train-auc:0.948418
+[190]	val-auc:0.948735	train-auc:0.948880
+[200]	val-auc:0.949079	train-auc:0.949268
+[210]	val-auc:0.949384	train-auc:0.949630
+[220]	val-auc:0.949645	train-auc:0.949943
+[230]	val-auc:0.949921	train-auc:0.950253
+[240]	val-auc:0.950145	train-auc:0.950550
+[250]	val-auc:0.950490	train-auc:0.950934
+[260]	val-auc:0.950725	train-auc:0.951225
+[270]	val-auc:0.951380	train-auc:0.951958
+[280]	val-auc:0.951802	train-auc:0.952436
+[290]	val-auc:0.952403	train-auc:0.953104
+[300]	val-auc:0.952945	train-auc:0.953693
+[310]	val-auc:0.953548	train-auc:0.954334
+[320]	val-auc:0.954147	train-auc:0.954933
+[330]	val-auc:0.954660	train-auc:0.955455
+[340]	val-auc:0.955066	train-auc:0.955885
+[350]	val-auc:0.955478	train-auc:0.956326
+[360]	val-auc:0.955816	train-auc:0.956704
+[370]	val-auc:0.956138	train-auc:0.957061
+[380]	val-auc:0.956475	train-auc:0.957425
+[390]	val-auc:0.956732	train-auc:0.957721
+[400]	val-auc:0.956977	train-auc:0.958007
+[410]	val-auc:0.957234	train-auc:0.958295
+[420]	val-auc:0.957510	train-auc:0.958584
+[430]	val-auc:0.957705	train-auc:0.958813
+[440]	val-auc:0.957903	train-auc:0.959042
+[450]	val-auc:0.958049	train-auc:0.959211
+[460]	val-auc:0.958209	train-auc:0.959399
+[470]	val-auc:0.958342	train-auc:0.959545
+[480]	val-auc:0.958563	train-auc:0.959797
+[490]	val-auc:0.958693	train-auc:0.959953
+[500]	val-auc:0.958910	train-auc:0.960193
+[510]	val-auc:0.959090	train-auc:0.960394
+[520]	val-auc:0.959263	train-auc:0.960581
+[530]	val-auc:0.959386	train-auc:0.960739
+[540]	val-auc:0.959562	train-auc:0.960946
+[550]	val-auc:0.959746	train-auc:0.961147
+[560]	val-auc:0.959943	train-auc:0.961389
+[570]	val-auc:0.960118	train-auc:0.961590
+[580]	val-auc:0.960302	train-auc:0.961807
+[590]	val-auc:0.960469	train-auc:0.962005
+[600]	val-auc:0.960625	train-auc:0.962208
+[610]	val-auc:0.960737	train-auc:0.962356
+
+....
+[940]	val-auc:0.963803	train-auc:0.967459
+[950]	val-auc:0.963862	train-auc:0.967582
+[960]	val-auc:0.963924	train-auc:0.967702
+[970]	val-auc:0.963979	train-auc:0.967824
+[980]	val-auc:0.964033	train-auc:0.967939
+[990]	val-auc:0.964087	train-auc:0.968048
+[1000]	val-auc:0.964144	train-auc:0.968162
+[1010]	val-auc:0.964192	train-auc:0.968275
+[1020]	val-auc:0.964240	train-auc:0.968364
+[1030]	val-auc:0.964290	train-auc:0.968473
+[1040]	val-auc:0.964317	train-auc:0.968550
+[1050]	val-auc:0.964363	train-auc:0.968651
+[1060]	val-auc:0.964405	train-auc:0.968751
+[1070]	val-auc:0.964460	train-auc:0.968853
+[1080]	val-auc:0.964490	train-auc:0.968954
+[1090]	val-auc:0.964514	train-auc:0.969034
+[1100]	val-auc:0.964558	train-auc:0.969127
+[1110]	val-auc:0.964598	train-auc:0.969216
+[1120]	val-auc:0.964632	train-auc:0.969310
+[1130]	val-auc:0.964663	train-auc:0.969394
+[1140]	val-auc:0.964702	train-auc:0.969496
+[1150]	val-auc:0.964741	train-auc:0.969595
+[1160]	val-auc:0.964761	train-auc:0.969680
+[1170]	val-auc:0.964783	train-auc:0.969766
+[1180]	val-auc:0.964830	train-auc:0.969866
+[1190]	val-auc:0.964860	train-auc:0.969967
+[1200]	val-auc:0.964875	train-auc:0.970053
+[1210]	val-auc:0.964911	train-auc:0.970149
+[1220]	val-auc:0.964935	train-auc:0.970228
+[1230]	val-auc:0.964965	train-auc:0.970314
+[1240]	val-auc:0.964981	train-auc:0.970378
+[1250]	val-auc:0.965006	train-auc:0.970458
+[1260]	val-auc:0.965042	train-auc:0.970543
+[1270]	val-auc:0.965058	train-auc:0.970608
+[1280]	val-auc:0.965084	train-auc:0.970694
+
+....
+[2100]	val-auc:0.966284	train-auc:0.976112
+[2110]	val-auc:0.966296	train-auc:0.976157
+[2120]	val-auc:0.966297	train-auc:0.976216
+[2130]	val-auc:0.966310	train-auc:0.976271
+[2140]	val-auc:0.966312	train-auc:0.976330
+[2150]	val-auc:0.966327	train-auc:0.976396
+[2160]	val-auc:0.966337	train-auc:0.976455
+[2170]	val-auc:0.966347	train-auc:0.976520
+[2180]	val-auc:0.966354	train-auc:0.976568
+[2190]	val-auc:0.966354	train-auc:0.976613
+[2200]	val-auc:0.966355	train-auc:0.976655
+[2210]	val-auc:0.966363	train-auc:0.976698
+[2220]	val-auc:0.966366	train-auc:0.976744
+[2230]	val-auc:0.966374	train-auc:0.976789
+....
+
+[3390]	val-auc:0.966981	train-auc:0.982125
+[3400]	val-auc:0.966991	train-auc:0.982172
+[3410]	val-auc:0.966992	train-auc:0.982212
+[3420]	val-auc:0.967000	train-auc:0.982257
+[3430]	val-auc:0.967011	train-auc:0.982299
+[3440]	val-auc:0.967018	train-auc:0.982349
+[3450]	val-auc:0.967020	train-auc:0.982397
+[3460]	val-auc:0.967023	train-auc:0.982432
+[3470]	val-auc:0.967025	train-auc:0.982467
+[3480]	val-auc:0.967034	train-auc:0.982512
+[3490]	val-auc:0.967033	train-auc:0.982550
+[3500]	val-auc:0.967037	train-auc:0.982596
+
+....
+[4390]	val-auc:0.967182	train-auc:0.985829
+[4400]	val-auc:0.967185	train-auc:0.985857
+[4410]	val-auc:0.967185	train-auc:0.985892
+[4420]	val-auc:0.967189	train-auc:0.985916
+[4430]	val-auc:0.967190	train-auc:0.985942
+[4440]	val-auc:0.967195	train-auc:0.985978
+[4450]	val-auc:0.967196	train-auc:0.986009
+[4460]	val-auc:0.967193	train-auc:0.986035
+[4470]	val-auc:0.967201	train-auc:0.986068
+[4480]	val-auc:0.967200	train-auc:0.986108
+[4490]	val-auc:0.967201	train-auc:0.986145
+[4500]	val-auc:0.967199	train-auc:0.986187
+
+....
+[3340]	val-auc:0.966964	train-auc:0.981944
+[3345]	val-auc:0.966968	train-auc:0.981961
+[3350]	val-auc:0.966968	train-auc:0.981978
+[3355]	val-auc:0.966970	train-auc:0.981999
+[3360]	val-auc:0.966972	train-auc:0.982018
+[3365]	val-auc:0.966971	train-auc:0.982042
+[3370]	val-auc:0.966970	train-auc:0.982052
+[3375]	val-auc:0.966969	train-auc:0.982065
+[3380]	val-auc:0.966973	train-auc:0.982084
+[3385]	val-auc:0.966974	train-auc:0.982099
+[3390]	val-auc:0.966981	train-auc:0.982125
+[3395]	val-auc:0.966981	train-auc:0.982142
+[3400]	val-auc:0.966991	train-auc:0.982172
+[3405]	val-auc:0.966993	train-auc:0.982192
+[3410]	val-auc:0.966992	train-auc:0.982212
+[3415]	val-auc:0.966999	train-auc:0.982235
+[3420]	val-auc:0.967000	train-auc:0.982257
+[3425]	val-auc:0.967003	train-auc:0.982276
+[3430]	val-auc:0.967011	train-auc:0.982299
+[3435]	val-auc:0.967010	train-auc:0.982322
+[3440]	val-auc:0.967018	train-auc:0.982349
+[3445]	val-auc:0.967019	train-auc:0.982370
+[3450]	val-auc:0.967020	train-auc:0.982397
+[3455]	val-auc:0.967019	train-auc:0.982414
+[3460]	val-auc:0.967023	train-auc:0.982432
+[3465]	val-auc:0.967026	train-auc:0.982447
+[3470]	val-auc:0.967025	train-auc:0.982467
+[3475]	val-auc:0.967034	train-auc:0.982493
+[3480]	val-auc:0.967034	train-auc:0.982512
+[3485]	val-auc:0.967037	train-auc:0.982529
+[3490]	val-auc:0.967033	train-auc:0.982550
+[3495]	val-auc:0.967033	train-auc:0.982573
+[3500]	val-auc:0.967037	train-auc:0.982596
+[3505]	val-auc:0.967041	train-auc:0.982619
+[3510]	val-auc:0.967039	train-auc:0.982637
+[3515]	val-auc:0.967039	train-auc:0.982656
+[3520]	val-auc:0.967041	train-auc:0.982673
+[3525]	val-auc:0.967043	train-auc:0.982694
+[3530]	val-auc:0.967048	train-auc:0.982713
+[3535]	val-auc:0.967049	train-auc:0.982728
+[3540]	val-auc:0.967054	train-auc:0.982743
+[3545]	val-auc:0.967055	train-auc:0.982761
+[3550]	val-auc:0.967054	train-auc:0.982784
+[3555]	val-auc:0.967052	train-auc:0.982804
+[3560]	val-auc:0.967056	train-auc:0.982833
+[3565]	val-auc:0.967059	train-auc:0.982850
+[3570]	val-auc:0.967059	train-auc:0.982868
+[3575]	val-auc:0.967059	train-auc:0.982893
+[3580]	val-auc:0.967061	train-auc:0.982905
+[3585]	val-auc:0.967059	train-auc:0.982920
+[3590]	val-auc:0.967058	train-auc:0.982943
+[3595]	val-auc:0.967059	train-auc:0.982951
+[3600]	val-auc:0.967059	train-auc:0.982972
+[3605]	val-auc:0.967058	train-auc:0.982997
+[3610]	val-auc:0.967062	train-auc:0.983022
+[3615]	val-auc:0.967058	train-auc:0.983039
+[3620]	val-auc:0.967059	train-auc:0.983060
+[3625]	val-auc:0.967057	train-auc:0.983081
+[3630]	val-auc:0.967056	train-auc:0.983097
+[3635]	val-auc:0.967057	train-auc:0.983110
+[3640]	val-auc:0.967059	train-auc:0.983121
+[3645]	val-auc:0.967059	train-auc:0.983138
+[3650]	val-auc:0.967061	train-auc:0.983150
+[3655]	val-auc:0.967065	train-auc:0.983168
+[3660]	val-auc:0.967067	train-auc:0.983179
+[3665]	val-auc:0.967065	train-auc:0.983198
+[3670]	val-auc:0.967065	train-auc:0.983214
+[3675]	val-auc:0.967060	train-auc:0.983232
+[3680]	val-auc:0.967059	train-auc:0.983250
+[3685]	val-auc:0.967060	train-auc:0.983269
+[3690]	val-auc:0.967061	train-auc:0.983283
+[3695]	val-auc:0.967063	train-auc:0.983296
+[3700]	val-auc:0.967062	train-auc:0.983313
+[3705]	val-auc:0.967064	train-auc:0.983337
+[3710]	val-auc:0.967062	train-auc:0.983359
+[3715]	val-auc:0.967062	train-auc:0.983381
+[3720]	val-auc:0.967061	train-auc:0.983393
+[3725]	val-auc:0.967061	train-auc:0.983415
+[3730]	val-auc:0.967062	train-auc:0.983442
+[3735]	val-auc:0.967065	train-auc:0.983458
+[3740]	val-auc:0.967069	train-auc:0.983472
+[3745]	val-auc:0.967066	train-auc:0.983490
+[3750]	val-auc:0.967071	train-auc:0.983514
+[3755]	val-auc:0.967080	train-auc:0.983529
+[3760]	val-auc:0.967075	train-auc:0.983547
+[3765]	val-auc:0.967074	train-auc:0.983568
+[3770]	val-auc:0.967077	train-auc:0.983587
+[3775]	val-auc:0.967076	train-auc:0.983605
+[3780]	val-auc:0.967079	train-auc:0.983622
+[3785]	val-auc:0.967081	train-auc:0.983635
+[3790]	val-auc:0.967082	train-auc:0.983646
+[3795]	val-auc:0.967083	train-auc:0.983666
+[3800]	val-auc:0.967081	train-auc:0.983688
+[3805]	val-auc:0.967084	train-auc:0.983715
+[3810]	val-auc:0.967082	train-auc:0.983734
+[3815]	val-auc:0.967083	train-auc:0.983760
+[3820]	val-auc:0.967083	train-auc:0.983788
+[3825]	val-auc:0.967086	train-auc:0.983798
+[3830]	val-auc:0.967093	train-auc:0.983819
+[3835]	val-auc:0.967091	train-auc:0.983841
+[3840]	val-auc:0.967091	train-auc:0.983849
+[3845]	val-auc:0.967089	train-auc:0.983865
+[3850]	val-auc:0.967102	train-auc:0.983891
+[3855]	val-auc:0.967107	train-auc:0.983911
+[3860]	val-auc:0.967110	train-auc:0.983925
+[3865]	val-auc:0.967110	train-auc:0.983943
+[3870]	val-auc:0.967117	train-auc:0.983967
+[3875]	val-auc:0.967120	train-auc:0.983987
+[3880]	val-auc:0.967117	train-auc:0.984008
+[3885]	val-auc:0.967121	train-auc:0.984025
+[3890]	val-auc:0.967122	train-auc:0.984045
+[3895]	val-auc:0.967125	train-auc:0.984068
+[3900]	val-auc:0.967122	train-auc:0.984091
+[3905]	val-auc:0.967121	train-auc:0.984106
+[3910]	val-auc:0.967120	train-auc:0.984119
+[3915]	val-auc:0.967125	train-auc:0.984137
+[3920]	val-auc:0.967124	train-auc:0.984150
+[3925]	val-auc:0.967127	train-auc:0.984176
+[3930]	val-auc:0.967129	train-auc:0.984203
+[3935]	val-auc:0.967128	train-auc:0.984226
+[3940]	val-auc:0.967132	train-auc:0.984239
+[3945]	val-auc:0.967133	train-auc:0.984251
+[3950]	val-auc:0.967132	train-auc:0.984269
+[3955]	val-auc:0.967135	train-auc:0.984277
+[3960]	val-auc:0.967138	train-auc:0.984291
+[3965]	val-auc:0.967137	train-auc:0.984311
+[3970]	val-auc:0.967137	train-auc:0.984326
+[3975]	val-auc:0.967145	train-auc:0.984344
+[3980]	val-auc:0.967147	train-auc:0.984364
+[3985]	val-auc:0.967146	train-auc:0.984380
+[3990]	val-auc:0.967148	train-auc:0.984403
+[3995]	val-auc:0.967151	train-auc:0.984435
+[4000]	val-auc:0.967153	train-auc:0.984456
+[4005]	val-auc:0.967152	train-auc:0.984474
+[4010]	val-auc:0.967152	train-auc:0.984492
+[4015]	val-auc:0.967156	train-auc:0.984510
+[4020]	val-auc:0.967155	train-auc:0.984525
+[4025]	val-auc:0.967154	train-auc:0.984539
+[4030]	val-auc:0.967157	train-auc:0.984552
+[4035]	val-auc:0.967159	train-auc:0.984572
+[4040]	val-auc:0.967159	train-auc:0.984590
+[4045]	val-auc:0.967158	train-auc:0.984609
+[4050]	val-auc:0.967158	train-auc:0.984629
+[4055]	val-auc:0.967159	train-auc:0.984644
+[4060]	val-auc:0.967158	train-auc:0.984662
+[4065]	val-auc:0.967156	train-auc:0.984669
+[4070]	val-auc:0.967156	train-auc:0.984683
+[4075]	val-auc:0.967160	train-auc:0.984713
+[4080]	val-auc:0.967161	train-auc:0.984730
+[4085]	val-auc:0.967164	train-auc:0.984749
+[4090]	val-auc:0.967162	train-auc:0.984767
+[4095]	val-auc:0.967162	train-auc:0.984777
+[4100]	val-auc:0.967161	train-auc:0.984801
+[4105]	val-auc:0.967162	train-auc:0.984812
+[4110]	val-auc:0.967161	train-auc:0.984832
+[4115]	val-auc:0.967161	train-auc:0.984855
+[4120]	val-auc:0.967157	train-auc:0.984876
+[4125]	val-auc:0.967159	train-auc:0.984895
+[4130]	val-auc:0.967157	train-auc:0.984910
+[4135]	val-auc:0.967157	train-auc:0.984925
+[4140]	val-auc:0.967157	train-auc:0.984936
+[4145]	val-auc:0.967158	train-auc:0.984957
+[4150]	val-auc:0.967156	train-auc:0.984974
+[4155]	val-auc:0.967154	train-auc:0.984990
+[4160]	val-auc:0.967156	train-auc:0.985005
+[4165]	val-auc:0.967157	train-auc:0.985024
+[4170]	val-auc:0.967157	train-auc:0.985042
+[4175]	val-auc:0.967156	train-auc:0.985052
+[4180]	val-auc:0.967157	train-auc:0.985071
+[4185]	val-auc:0.967155	train-auc:0.985093
+[4190]	val-auc:0.967155	train-auc:0.985110
+[4195]	val-auc:0.967158	train-auc:0.985129
+[4200]	val-auc:0.967159	train-auc:0.985138
+[4205]	val-auc:0.967161	train-auc:0.985152
+[4210]	val-auc:0.967160	train-auc:0.985163
+[4215]	val-auc:0.967159	train-auc:0.985169
+[4220]	val-auc:0.967157	train-auc:0.985190
+[4225]	val-auc:0.967159	train-auc:0.985212
+[4230]	val-auc:0.967160	train-auc:0.985229
+[4235]	val-auc:0.967164	train-auc:0.985252
+[4240]	val-auc:0.967167	train-auc:0.985265
+[4245]	val-auc:0.967167	train-auc:0.985280
+[4250]	val-auc:0.967167	train-auc:0.985288
+[4255]	val-auc:0.967167	train-auc:0.985313
+[4260]	val-auc:0.967170	train-auc:0.985334
+[4265]	val-auc:0.967170	train-auc:0.985353
+[4270]	val-auc:0.967171	train-auc:0.985370
+[4275]	val-auc:0.967172	train-auc:0.985391
+[4280]	val-auc:0.967173	train-auc:0.985407
+[4285]	val-auc:0.967174	train-auc:0.985425
+[4290]	val-auc:0.967173	train-auc:0.985439
+[4295]	val-auc:0.967172	train-auc:0.985457
+[4300]	val-auc:0.967173	train-auc:0.985474
+[4305]	val-auc:0.967174	train-auc:0.985498
+[4310]	val-auc:0.967177	train-auc:0.985522
+[4315]	val-auc:0.967174	train-auc:0.985541
+[4320]	val-auc:0.967175	train-auc:0.985561
+[4325]	val-auc:0.967174	train-auc:0.985578
+[4330]	val-auc:0.967176	train-auc:0.985598
+[4335]	val-auc:0.967175	train-auc:0.985616
+[4340]	val-auc:0.967173	train-auc:0.985639
+[4345]	val-auc:0.967175	train-auc:0.985656
+[4350]	val-auc:0.967177	train-auc:0.985677
+[4355]	val-auc:0.967181	train-auc:0.985697
+[4360]	val-auc:0.967179	train-auc:0.985713
+[4365]	val-auc:0.967178	train-auc:0.985740
+[4370]	val-auc:0.967177	train-auc:0.985763
+[4375]	val-auc:0.967180	train-auc:0.985785
+[4380]	val-auc:0.967182	train-auc:0.985795
+[4385]	val-auc:0.967183	train-auc:0.985816
+[4390]	val-auc:0.967182	train-auc:0.985829
+[4395]	val-auc:0.967185	train-auc:0.985843
+[4400]	val-auc:0.967185	train-auc:0.985857
+[4405]	val-auc:0.967185	train-auc:0.985869
+[4410]	val-auc:0.967185	train-auc:0.985892
+[4415]	val-auc:0.967190	train-auc:0.985910
+[4420]	val-auc:0.967189	train-auc:0.985916
+[4425]	val-auc:0.967189	train-auc:0.985928
+[4430]	val-auc:0.967190	train-auc:0.985942
+[4435]	val-auc:0.967192	train-auc:0.985956
+[4440]	val-auc:0.967195	train-auc:0.985978
+[4445]	val-auc:0.967195	train-auc:0.985987
+[4450]	val-auc:0.967196	train-auc:0.986009
+[4455]	val-auc:0.967195	train-auc:0.986024
+[4460]	val-auc:0.967193	train-auc:0.986035
+[4465]	val-auc:0.967197	train-auc:0.986046
+[4470]	val-auc:0.967201	train-auc:0.986068
+[4475]	val-auc:0.967200	train-auc:0.986091
+[4480]	val-auc:0.967200	train-auc:0.986108
+[4485]	val-auc:0.967200	train-auc:0.986125
+[4490]	val-auc:0.967201	train-auc:0.986145
+[4495]	val-auc:0.967199	train-auc:0.986166
+[4500]	val-auc:0.967199	train-auc:0.986187
+[4505]	val-auc:0.967199	train-auc:0.986210
+[4510]	val-auc:0.967198	train-auc:0.986237
+[4515]	val-auc:0.967200	train-auc:0.986259
+[4520]	val-auc:0.967198	train-auc:0.986274
+[4525]	val-auc:0.967200	train-auc:0.986297
+[4530]	val-auc:0.967199	train-auc:0.986314
+[4535]	val-auc:0.967205	train-auc:0.986335
+[4540]	val-auc:0.967208	train-auc:0.986356
+[4545]	val-auc:0.967215	train-auc:0.986368
+[4550]	val-auc:0.967215	train-auc:0.986382
+[4555]	val-auc:0.967215	train-auc:0.986387
+[4560]	val-auc:0.967216	train-auc:0.986403
+[4565]	val-auc:0.967219	train-auc:0.986413
+[4570]	val-auc:0.967219	train-auc:0.986433
+[4575]	val-auc:0.967221	train-auc:0.986438
+[4580]	val-auc:0.967220	train-auc:0.986459
+[4585]	val-auc:0.967220	train-auc:0.986481
+[4590]	val-auc:0.967222	train-auc:0.986498
+[4595]	val-auc:0.967221	train-auc:0.986514
+[4600]	val-auc:0.967220	train-auc:0.986524
+[4605]	val-auc:0.967222	train-auc:0.986538
+[4610]	val-auc:0.967222	train-auc:0.986551
+[4615]	val-auc:0.967224	train-auc:0.986561
+[4620]	val-auc:0.967222	train-auc:0.986578
+[4625]	val-auc:0.967222	train-auc:0.986587
+[4630]	val-auc:0.967219	train-auc:0.986595
+[4635]	val-auc:0.967219	train-auc:0.986612
+[4640]	val-auc:0.967218	train-auc:0.986621
+[4645]	val-auc:0.967219	train-auc:0.986634
+[4650]	val-auc:0.967217	train-auc:0.986648
+[4655]	val-auc:0.967217	train-auc:0.986659
+[4660]	val-auc:0.967223	train-auc:0.986673
+[4665]	val-auc:0.967222	train-auc:0.986680
+[4670]	val-auc:0.967224	train-auc:0.986689
+[4675]	val-auc:0.967221	train-auc:0.986707
+[4680]	val-auc:0.967224	train-auc:0.986727
+[4685]	val-auc:0.967226	train-auc:0.986750
+[4690]	val-auc:0.967225	train-auc:0.986768
+[4695]	val-auc:0.967227	train-auc:0.986789
+[4700]	val-auc:0.967227	train-auc:0.986808
+[4705]	val-auc:0.967227	train-auc:0.986829
+[4710]	val-auc:0.967227	train-auc:0.986844
+[4715]	val-auc:0.967224	train-auc:0.986868
+[4720]	val-auc:0.967226	train-auc:0.986883
+[4725]	val-auc:0.967226	train-auc:0.986904
+[4730]	val-auc:0.967224	train-auc:0.986920
+[4735]	val-auc:0.967224	train-auc:0.986934
+[4740]	val-auc:0.967223	train-auc:0.986951
+[4745]	val-auc:0.967223	train-auc:0.986964
+[4750]	val-auc:0.967223	train-auc:0.986984
+[4755]	val-auc:0.967223	train-auc:0.986999
+[4760]	val-auc:0.967223	train-auc:0.987010
+[4765]	val-auc:0.967222	train-auc:0.987024
+[4770]	val-auc:0.967221	train-auc:0.987036
+[4775]	val-auc:0.967221	train-auc:0.987053
+[4780]	val-auc:0.967220	train-auc:0.987068
+[4785]	val-auc:0.967219	train-auc:0.987086
+[4790]	val-auc:0.967220	train-auc:0.987102
+[4795]	val-auc:0.967220	train-auc:0.987118
+[4800]	val-auc:0.967221	train-auc:0.987133
+[4805]	val-auc:0.967219	train-auc:0.987142
+[4810]	val-auc:0.967217	train-auc:0.987160
+[4815]	val-auc:0.967217	train-auc:0.987179
+[4820]	val-auc:0.967219	train-auc:0.987194
+[4825]	val-auc:0.967217	train-auc:0.987208
+[4830]	val-auc:0.967220	train-auc:0.987219
+[4835]	val-auc:0.967222	train-auc:0.987234
+[4840]	val-auc:0.967221	train-auc:0.987252
+[4845]	val-auc:0.967221	train-auc:0.987258
+[4850]	val-auc:0.967220	train-auc:0.987270
+[4855]	val-auc:0.967218	train-auc:0.987277
+[4860]	val-auc:0.967219	train-auc:0.987288
+[4865]	val-auc:0.967219	train-auc:0.987307
+[4870]	val-auc:0.967220	train-auc:0.987330
+[4875]	val-auc:0.967220	train-auc:0.987348
+[4880]	val-auc:0.967220	train-auc:0.987369
+[4885]	val-auc:0.967218	train-auc:0.987382
+[4890]	val-auc:0.967218	train-auc:0.987399
+[4895]	val-auc:0.967219	train-auc:0.987415
+[4900]	val-auc:0.967218	train-auc:0.987436
+[4905]	val-auc:0.967220	train-auc:0.987455
+[4910]	val-auc:0.967222	train-auc:0.987472
+[4915]	val-auc:0.967220	train-auc:0.987490
+[4920]	val-auc:0.967222	train-auc:0.987507
+[4925]	val-auc:0.967223	train-auc:0.987523
+[4930]	val-auc:0.967223	train-auc:0.987540
+[4935]	val-auc:0.967221	train-auc:0.987558
+[4940]	val-auc:0.967226	train-auc:0.987583
+[4945]	val-auc:0.967225	train-auc:0.987596
+[4950]	val-auc:0.967226	train-auc:0.987609
+[4955]	val-auc:0.967223	train-auc:0.987626
+[4960]	val-auc:0.967219	train-auc:0.987649
+[4965]	val-auc:0.967217	train-auc:0.987669
+[4970]	val-auc:0.967216	train-auc:0.987680
+[4975]	val-auc:0.967216	train-auc:0.987699
+[4980]	val-auc:0.967216	train-auc:0.987721
+[4985]	val-auc:0.967219	train-auc:0.987742
+[4990]	val-auc:0.967221	train-auc:0.987762
+[4995]	val-auc:0.967224	train-auc:0.987784
+    user   system  elapsed 
+27186.81    44.75  7314.67 
+> save(clf, file="./xgb_stop_1_50k-validation_win7_5krounds-baseline-1_eta_0_01.rda")
+> pred1 <- predict(clf, data.matrix(test[,feature.names]))
+> submission <- data.frame(QuoteNumber=test$QuoteNumber,
++ QuoteConversion_Flag=pred1)
+> cat("saving the submission file\n")
+saving the submission file
+> write_csv(submission, "xgb_stop_1_50k-validation__win7_5krounds_eta_0.01.csv")
+> watchlist <- list(val=dval,train=dtrain)
+> param <- list(  objective         = "binary:logistic", 
++                 booster           = "gbtree",
++                 eval_metric       = "auc",
++                 eta                  = 0.01, # 0.06, #0.01,
++                 max_depth           = 6, #changed from default of 8
++                 #subsample           = 0.83, # 0.7
++                 #colsample_bytree    = 0.77 # 0.7
++                 #num_parallel_tree   = 2
++                 # alpha = 0.0001, 
++                 # lambda = 1
++ )
+Error in list(objective = "binary:logistic", booster = "gbtree", eval_metric = "auc",  : 
+  argument 6 is empty
+> watchlist <- list(val=dval,train=dtrain)
+> param <- list(  objective         = "binary:logistic", 
++                 booster           = "gbtree",
++                 eval_metric       = "auc",
++                 eta                  = 0.01, # 0.06, #0.01,
++                 max_depth           = 6 #changed from default of 8
++                 #subsample           = 0.83, # 0.7
++                 #colsample_bytree    = 0.77 # 0.7
++                 #num_parallel_tree   = 2
++                 # alpha = 0.0001, 
++                 # lambda = 1
++ )
+> system.time(clf <- xgb.train(   params              = param, 
++                                 data                = dtrain, 
++                                 nrounds             = 10000, 
++                                 verbose             = 1,  #1
++                                 #early.stop.round    = 150,
++                                 print.every.n       = 10,
++                                 watchlist           = watchlist,
++                                 maximize            = FALSE
++ )
++ )
+[0]	val-auc:0.925810	train-auc:0.925611
+[10]	val-auc:0.928184	train-auc:0.927970
+
+[600]	val-auc:0.960625	train-auc:0.962208
+[610]	val-auc:0.960737	train-auc:0.962356
+[620]	val-auc:0.960955	train-auc:0.962621
+[630]	val-auc:0.961127	train-auc:0.962851
+
+[910]	val-auc:0.963614	train-auc:0.967082
+[920]	val-auc:0.963671	train-auc:0.967192
+[930]	val-auc:0.963737	train-auc:0.967325
+
+[1030]	val-auc:0.964290	train-auc:0.968473
+[1040]	val-auc:0.964317	train-auc:0.968550
+[1050]	val-auc:0.964363	train-auc:0.968651
+
+[1320]	val-auc:0.965198	train-auc:0.971044
+[1330]	val-auc:0.965222	train-auc:0.971125
+[1340]	val-auc:0.965245	train-auc:0.971203
+[1440]	val-auc:0.965461	train-auc:0.972005
+[1450]	val-auc:0.965482	train-auc:0.972096
+
+[1990]	val-auc:0.966184	train-auc:0.975527
+[2000]	val-auc:0.966193	train-auc:0.975583
+[2010]	val-auc:0.966206	train-auc:0.975636
+[2130]	val-auc:0.966310	train-auc:0.976271
+[2140]	val-auc:0.966312	train-auc:0.976330
+[2150]	val-auc:0.966327	train-auc:0.976396
+
+[2670]	val-auc:0.966677	train-auc:0.979064
+[2680]	val-auc:0.966682	train-auc:0.979108
+[2690]	val-auc:0.966688	train-auc:0.979159
+[2700]	val-auc:0.966695	train-auc:0.979212
+[2710]	val-auc:0.966700	train-auc:0.979258
+[2720]	val-auc:0.966703	train-auc:0.979305
+[2730]	val-auc:0.966710	train-auc:0.979351
+
+[3020]	val-auc:0.966802	train-auc:0.980602
+[3030]	val-auc:0.966812	train-auc:0.980651
+[3040]	val-auc:0.966815	train-auc:0.980690
+[3050]	val-auc:0.966817	train-auc:0.980738
+[3060]	val-auc:0.966826	train-auc:0.980789
+[3070]	val-auc:0.966836	train-auc:0.980839
+[3080]	val-auc:0.966841	train-auc:0.980886
+[3090]	val-auc:0.966843	train-auc:0.980928
+[3100]	val-auc:0.966848	train-auc:0.980967
+[3110]	val-auc:0.966852	train-auc:0.981028
+
+[3440]	val-auc:0.967018	train-auc:0.982349
+[3450]	val-auc:0.967020	train-auc:0.982397
+[3460]	val-auc:0.967023	train-auc:0.982432
+[3470]	val-auc:0.967025	train-auc:0.982467
+[3480]	val-auc:0.967034	train-auc:0.982512
+[3490]	val-auc:0.967033	train-auc:0.982550
+[3500]	val-auc:0.967037	train-auc:0.982596
+[3510]	val-auc:0.967039	train-auc:0.982637
+[3520]	val-auc:0.967041	train-auc:0.982673
+[3530]	val-auc:0.967048	train-auc:0.982713
+[3540]	val-auc:0.967054	train-auc:0.982743
+[3550]	val-auc:0.967054	train-auc:0.982784
+[3560]	val-auc:0.967056	train-auc:0.982833
+
+[4300]	val-auc:0.967173	train-auc:0.985474
+[4310]	val-auc:0.967177	train-auc:0.985522
+[4320]	val-auc:0.967175	train-auc:0.985561
+[4330]	val-auc:0.967176	train-auc:0.985598
+[4340]	val-auc:0.967173	train-auc:0.985639
+[4350]	val-auc:0.967177	train-auc:0.985677
+[4360]	val-auc:0.967179	train-auc:0.985713
+
+
+....
+[4620]	val-auc:0.967222	train-auc:0.986578
+[4630]	val-auc:0.967219	train-auc:0.986595
+[4640]	val-auc:0.967218	train-auc:0.986621
+[4650]	val-auc:0.967217	train-auc:0.986648
+[4660]	val-auc:0.967223	train-auc:0.986673
+[4670]	val-auc:0.967224	train-auc:0.986689
+[4680]	val-auc:0.967224	train-auc:0.986727
+[4690]	val-auc:0.967225	train-auc:0.986768
+[4700]	val-auc:0.967227	train-auc:0.986808
+[4710]	val-auc:0.967227	train-auc:0.986844
+[4720]	val-auc:0.967226	train-auc:0.986883
+....
+
+[9390]	val-auc:0.966818	train-auc:0.996299
+[9400]	val-auc:0.966817	train-auc:0.996311
+[9410]	val-auc:0.966813	train-auc:0.996318
+[9420]	val-auc:0.966814	train-auc:0.996325
+
+
+=========another attempt====
+max.depth=10, rounds=6000
+
+[220]	val-auc:0.960613	train-auc:0.965445
+[230]	val-auc:0.960775	train-auc:0.965755
+[240]	val-auc:0.960907	train-auc:0.966037
+[250]	val-auc:0.961049	train-auc:0.966331
+[260]	val-auc:0.961193	train-auc:0.966619    --last time, with max.depth=6, for .9610, rounds ~ 600
+
+[400]	val-auc:0.962724	train-auc:0.969876
+[410]	val-auc:0.962831	train-auc:0.970064
+[420]	val-auc:0.962926	train-auc:0.970236
+[430]	val-auc:0.963026	train-auc:0.970415   -last time, with m.d =6, for .9630, rounds = ~ 800
+
+
+[1670]	val-auc:0.966999	train-auc:0.994154
+[1680]	val-auc:0.967001	train-auc:0.994251
+[1690]	val-auc:0.967006	train-auc:0.994348
+[1700]	val-auc:0.967004	train-auc:0.994413
+[1710]	val-auc:0.966991	train-auc:0.994513
+[1720]	val-auc:0.966992	train-auc:0.994602
+[1730]	val-auc:0.966997	train-auc:0.994700
+[1740]	val-auc:0.966999	train-auc:0.994779
+[1750]	val-auc:0.967003	train-auc:0.994856
+[1760]	val-auc:0.967008	train-auc:0.994924
+[1770]	val-auc:0.967006	train-auc:0.994998
+[1780]	val-auc:0.967006	train-auc:0.995065
+[1790]	val-auc:0.967010	train-auc:0.995138
+[1800]	val-auc:0.967013	train-auc:0.995191
+[1810]	val-auc:0.967001	train-auc:0.995250
+[1820]	val-auc:0.967004	train-auc:0.995311
+[1830]	val-auc:0.967005	train-auc:0.995400
+[1840]	val-auc:0.967004	train-auc:0.995467
+[1850]	val-auc:0.967003	train-auc:0.995518
+[1860]	val-auc:0.967009	train-auc:0.995581
+[1870]	val-auc:0.967005	train-auc:0.995650
+[1880]	val-auc:0.966991	train-auc:0.995725
+[1890]	val-auc:0.966995	train-auc:0.995779
+[1900]	val-auc:0.967000	train-auc:0.995847
+[1910]	val-auc:0.966996	train-auc:0.995927
+[1920]	val-auc:0.967003	train-auc:0.995983
+[1930]	val-auc:0.967007	train-auc:0.996065
+[1940]	val-auc:0.967004	train-auc:0.996135
+[1950]	val-auc:0.967006	train-auc:0.996207
+[1960]	val-auc:0.967006	train-auc:0.996271
+[1970]	val-auc:0.967007	train-auc:0.996335
+[1980]	val-auc:0.967004	train-auc:0.996406
+[1990]	val-auc:0.966999	train-auc:0.996467
+[2000]	val-auc:0.967002	train-auc:0.996533
+[2010]	val-auc:0.967004	train-auc:0.996610
+[2020]	val-auc:0.966998	train-auc:0.996663
+[2030]	val-auc:0.966990	train-auc:0.996727
+
+
+....[2290]	val-auc:0.966922	train-auc:0.997998
+[2300]	val-auc:0.966924	train-auc:0.998040
+[2310]	val-auc:0.966926	train-auc:0.998080
+[2320]	val-auc:0.966923	train-auc:0.998121
+[2330]	val-auc:0.966922	train-auc:0.998160
+[2340]	val-auc:0.966920	train-auc:0.998185
+[2350]	val-auc:0.966923	train-auc:0.998215
+[2360]	val-auc:0.966917	train-auc:0.998257
+
+....
+
+=======eta=0.2, m.depth=6, rounds=6k
+
+[8860]	val-auc:0.966894	train-auc:0.995733
+[8870]	val-auc:0.966893	train-auc:0.995745
+[8880]	val-auc:0.966893	train-auc:0.995758
+[8890]	val-auc:0.966889	train-auc:0.995768
+[8900]	val-auc:0.966887	train-auc:0.995775
+[8910]	val-auc:0.966886	train-auc:0.995786
+[8920]	val-auc:0.966884	train-auc:0.995796
+[8930]	val-auc:0.966884	train-auc:0.995803
+[8940]	val-auc:0.966882	train-auc:0.995812
+[8950]	val-auc:0.966878	train-auc:0.995821
+[8960]	val-auc:0.966875	train-auc:0.995829
+[8970]	val-auc:0.966873	train-auc:0.995838
+[8980]	val-auc:0.966875	train-auc:0.995847
+[8990]	val-auc:0.966874	train-auc:0.995858
+[9000]	val-auc:0.966875	train-auc:0.995871
+[9010]	val-auc:0.966876	train-auc:0.995879
+[9020]	val-auc:0.966873	train-auc:0.995893
+[9030]	val-auc:0.966871	train-auc:0.995903
+[9040]	val-auc:0.966871	train-auc:0.995916
+[9050]	val-auc:0.966870	train-auc:0.995929
+[9060]	val-auc:0.966871	train-auc:0.995944
+[9070]	val-auc:0.966870	train-auc:0.995953
+[9080]	val-auc:0.966868	train-auc:0.995964
+[9090]	val-auc:0.966867	train-auc:0.995975
+[9100]	val-auc:0.966863	train-auc:0.995985
+[9110]	val-auc:0.966861	train-auc:0.995997
+[9120]	val-auc:0.966858	train-auc:0.996003
+[9130]	val-auc:0.966855	train-auc:0.996013
+[9140]	val-auc:0.966853	train-auc:0.996024
+[9150]	val-auc:0.966853	train-auc:0.996032
+[9160]	val-auc:0.966854	train-auc:0.996044
+[9170]	val-auc:0.966851	train-auc:0.996059
+[9180]	val-auc:0.966851	train-auc:0.996067
+[9190]	val-auc:0.966849	train-auc:0.996076
+[9200]	val-auc:0.966848	train-auc:0.996087
+[9210]	val-auc:0.966846	train-auc:0.996095
+[9220]	val-auc:0.966843	train-auc:0.996099
+[9230]	val-auc:0.966843	train-auc:0.996110
+[9240]	val-auc:0.966843	train-auc:0.996122
+[9250]	val-auc:0.966843	train-auc:0.996136
+[9260]	val-auc:0.966843	train-auc:0.996149
+[9270]	val-auc:0.966841	train-auc:0.996159
+[9280]	val-auc:0.966839	train-auc:0.996172
+[9290]	val-auc:0.966841	train-auc:0.996185
+[9300]	val-auc:0.966839	train-auc:0.996198
+[9310]	val-auc:0.966835	train-auc:0.996211
+[9320]	val-auc:0.966835	train-auc:0.996221
+[9330]	val-auc:0.966832	train-auc:0.996234
+[9340]	val-auc:0.966829	train-auc:0.996245
+[9350]	val-auc:0.966828	train-auc:0.996251
+[9360]	val-auc:0.966828	train-auc:0.996260
+[9370]	val-auc:0.966825	train-auc:0.996272
+[9380]	val-auc:0.966821	train-auc:0.996287
+[9390]	val-auc:0.966818	train-auc:0.996299
+[9400]	val-auc:0.966817	train-auc:0.996311
+[9410]	val-auc:0.966813	train-auc:0.996318
+[9420]	val-auc:0.966814	train-auc:0.996325
+
+Timing stopped at: 51627.66 89.2 13937.9 
+> install.packages("optunity")
+Installing package into ‘C:/Users/aansari/Documents/R/win-library/3.2’
+(as ‘lib’ is unspecified)
+Warning in install.packages :
+  package ‘optunity’ is not available (for R version 3.2.2)
+> param <- list(  objective         = "binary:logistic", 
++                 booster           = "gbtree",
++                 eval_metric       = "auc",
++                 eta                  = 0.01, # 0.06, #0.01,
++                 max_depth           = 10 #changed from default of 8
++                 #subsample           = 0.83, # 0.7
++                 #colsample_bytree    = 0.77 # 0.7
++                 #num_parallel_tree   = 2
++                 # alpha = 0.0001, 
++                 # lambda = 1
++ )
+> system.time(clf <- xgb.train(   params              = param, 
++                                 data                = dtrain, 
++                                 nrounds             = 6000, 
++                                 verbose             = 1,  #1
++                                 #early.stop.round    = 150,
++                                 print.every.n       = 10,
++                                 watchlist           = watchlist,
++                                 maximize            = FALSE
++ )
++ )
+[0]	val-auc:0.949391	train-auc:0.951196
+[10]	val-auc:0.953574	train-auc:0.955334
+[20]	val-auc:0.954130	train-auc:0.955851
+[30]	val-auc:0.954856	train-auc:0.956480
+[40]	val-auc:0.955355	train-auc:0.957042
+[50]	val-auc:0.955633	train-auc:0.957440
+[60]	val-auc:0.956027	train-auc:0.957921
+[70]	val-auc:0.956511	train-auc:0.958548
+[80]	val-auc:0.956938	train-auc:0.959112
+[90]	val-auc:0.957364	train-auc:0.959669
+[100]	val-auc:0.957593	train-auc:0.960066
+[110]	val-auc:0.957830	train-auc:0.960485
+[120]	val-auc:0.958104	train-auc:0.960984
+[130]	val-auc:0.958305	train-auc:0.961465
+[140]	val-auc:0.958544	train-auc:0.961983
+[150]	val-auc:0.958841	train-auc:0.962473
+[160]	val-auc:0.959180	train-auc:0.963004
+[170]	val-auc:0.959498	train-auc:0.963468
+[180]	val-auc:0.959799	train-auc:0.963921
+[190]	val-auc:0.959998	train-auc:0.964298
+[200]	val-auc:0.960199	train-auc:0.964688
+[210]	val-auc:0.960445	train-auc:0.965098
+[220]	val-auc:0.960613	train-auc:0.965445
+[230]	val-auc:0.960775	train-auc:0.965755
+[240]	val-auc:0.960907	train-auc:0.966037
+[250]	val-auc:0.961049	train-auc:0.966331
+[260]	val-auc:0.961193	train-auc:0.966619
+[270]	val-auc:0.961348	train-auc:0.966919
+[280]	val-auc:0.961476	train-auc:0.967148
+[290]	val-auc:0.961606	train-auc:0.967391
+[300]	val-auc:0.961744	train-auc:0.967652
+[310]	val-auc:0.961847	train-auc:0.967883
+[320]	val-auc:0.961936	train-auc:0.968098
+[330]	val-auc:0.962040	train-auc:0.968335
+[340]	val-auc:0.962133	train-auc:0.968579
+[350]	val-auc:0.962204	train-auc:0.968830
+[360]	val-auc:0.962315	train-auc:0.969088
+[370]	val-auc:0.962416	train-auc:0.969292
+[380]	val-auc:0.962513	train-auc:0.969487
+[390]	val-auc:0.962626	train-auc:0.969687
+[400]	val-auc:0.962724	train-auc:0.969876
+[410]	val-auc:0.962831	train-auc:0.970064
+[420]	val-auc:0.962926	train-auc:0.970236
+[430]	val-auc:0.963026	train-auc:0.970415
+[440]	val-auc:0.963148	train-auc:0.970648
+[450]	val-auc:0.963253	train-auc:0.970839
+[460]	val-auc:0.963360	train-auc:0.971013
+[470]	val-auc:0.963482	train-auc:0.971215
+[480]	val-auc:0.963594	train-auc:0.971424
+[490]	val-auc:0.963690	train-auc:0.971611
+[500]	val-auc:0.963796	train-auc:0.971834
+[510]	val-auc:0.963908	train-auc:0.972083
+[520]	val-auc:0.964003	train-auc:0.972319
+[530]	val-auc:0.964109	train-auc:0.972560
+[540]	val-auc:0.964209	train-auc:0.972787
+[550]	val-auc:0.964278	train-auc:0.973000
+[560]	val-auc:0.964400	train-auc:0.973257
+[570]	val-auc:0.964475	train-auc:0.973494
+[580]	val-auc:0.964542	train-auc:0.973724
+[590]	val-auc:0.964599	train-auc:0.973947
+[600]	val-auc:0.964642	train-auc:0.974165
+[610]	val-auc:0.964704	train-auc:0.974461
+[620]	val-auc:0.964745	train-auc:0.974678
+[630]	val-auc:0.964815	train-auc:0.974983
+[640]	val-auc:0.964905	train-auc:0.975302
+[650]	val-auc:0.964967	train-auc:0.975585
+[660]	val-auc:0.965051	train-auc:0.975876
+[670]	val-auc:0.965116	train-auc:0.976090
+[680]	val-auc:0.965178	train-auc:0.976385
+[690]	val-auc:0.965242	train-auc:0.976608
+[700]	val-auc:0.965297	train-auc:0.976819
+[710]	val-auc:0.965366	train-auc:0.977053
+[720]	val-auc:0.965418	train-auc:0.977325
+[730]	val-auc:0.965478	train-auc:0.977637
+[740]	val-auc:0.965540	train-auc:0.977989
+[750]	val-auc:0.965586	train-auc:0.978338
+[760]	val-auc:0.965620	train-auc:0.978718
+[770]	val-auc:0.965636	train-auc:0.979080
+[780]	val-auc:0.965681	train-auc:0.979370
+[790]	val-auc:0.965716	train-auc:0.979701
+[800]	val-auc:0.965754	train-auc:0.980035
+[810]	val-auc:0.965788	train-auc:0.980382
+[820]	val-auc:0.965812	train-auc:0.980659
+[830]	val-auc:0.965838	train-auc:0.980960
+[840]	val-auc:0.965864	train-auc:0.981186
+[850]	val-auc:0.965899	train-auc:0.981397
+[860]	val-auc:0.965921	train-auc:0.981672
+[870]	val-auc:0.965947	train-auc:0.981962
+[880]	val-auc:0.965981	train-auc:0.982160
+[890]	val-auc:0.966005	train-auc:0.982381
+[900]	val-auc:0.966044	train-auc:0.982640
+[910]	val-auc:0.966062	train-auc:0.982879
+[920]	val-auc:0.966111	train-auc:0.983154
+[930]	val-auc:0.966134	train-auc:0.983400
+[940]	val-auc:0.966162	train-auc:0.983602
+[950]	val-auc:0.966187	train-auc:0.983820
+[960]	val-auc:0.966203	train-auc:0.983989
+[970]	val-auc:0.966212	train-auc:0.984225
+[980]	val-auc:0.966232	train-auc:0.984494
+[990]	val-auc:0.966257	train-auc:0.984696
+[1000]	val-auc:0.966276	train-auc:0.984978
+[1010]	val-auc:0.966308	train-auc:0.985212
+[1020]	val-auc:0.966316	train-auc:0.985452
+[1030]	val-auc:0.966334	train-auc:0.985687
+[1040]	val-auc:0.966352	train-auc:0.985888
+[1050]	val-auc:0.966364	train-auc:0.986095
+[1060]	val-auc:0.966393	train-auc:0.986315
+[1070]	val-auc:0.966424	train-auc:0.986477
+[1080]	val-auc:0.966440	train-auc:0.986654
+[1090]	val-auc:0.966462	train-auc:0.986806
+[1100]	val-auc:0.966484	train-auc:0.986992
+[1110]	val-auc:0.966496	train-auc:0.987133
+[1120]	val-auc:0.966502	train-auc:0.987286
+[1130]	val-auc:0.966521	train-auc:0.987426
+[1140]	val-auc:0.966535	train-auc:0.987623
+[1150]	val-auc:0.966551	train-auc:0.987773
+[1160]	val-auc:0.966567	train-auc:0.987916
+[1170]	val-auc:0.966575	train-auc:0.988043
+[1180]	val-auc:0.966581	train-auc:0.988185
+[1190]	val-auc:0.966598	train-auc:0.988357
+[1200]	val-auc:0.966603	train-auc:0.988482
+[1210]	val-auc:0.966619	train-auc:0.988617
+[1220]	val-auc:0.966626	train-auc:0.988803
+[1230]	val-auc:0.966649	train-auc:0.988960
+[1240]	val-auc:0.966668	train-auc:0.989140
+[1250]	val-auc:0.966677	train-auc:0.989290
+[1260]	val-auc:0.966695	train-auc:0.989448
+[1270]	val-auc:0.966706	train-auc:0.989656
+[1280]	val-auc:0.966714	train-auc:0.989835
+[1290]	val-auc:0.966730	train-auc:0.989980
+[1300]	val-auc:0.966739	train-auc:0.990076
+[1310]	val-auc:0.966770	train-auc:0.990243
+[1320]	val-auc:0.966787	train-auc:0.990365
+[1330]	val-auc:0.966795	train-auc:0.990476
+[1340]	val-auc:0.966802	train-auc:0.990607
+[1350]	val-auc:0.966815	train-auc:0.990757
+[1360]	val-auc:0.966825	train-auc:0.990873
+[1370]	val-auc:0.966828	train-auc:0.991037
+[1380]	val-auc:0.966838	train-auc:0.991169
+[1390]	val-auc:0.966845	train-auc:0.991261
+[1400]	val-auc:0.966855	train-auc:0.991358
+[1410]	val-auc:0.966853	train-auc:0.991466
+[1420]	val-auc:0.966866	train-auc:0.991606
+[1430]	val-auc:0.966867	train-auc:0.991766
+[1440]	val-auc:0.966874	train-auc:0.991909
+[1450]	val-auc:0.966878	train-auc:0.992062
+[1460]	val-auc:0.966884	train-auc:0.992148
+[1470]	val-auc:0.966891	train-auc:0.992221
+[1480]	val-auc:0.966902	train-auc:0.992293
+[1490]	val-auc:0.966902	train-auc:0.992456
+[1500]	val-auc:0.966903	train-auc:0.992576
+[1510]	val-auc:0.966926	train-auc:0.992686
+[1520]	val-auc:0.966940	train-auc:0.992768
+[1530]	val-auc:0.966942	train-auc:0.992854
+[1540]	val-auc:0.966948	train-auc:0.992977
+[1550]	val-auc:0.966951	train-auc:0.993075
+[1560]	val-auc:0.966960	train-auc:0.993167
+[1570]	val-auc:0.966968	train-auc:0.993314
+[1580]	val-auc:0.966977	train-auc:0.993422
+[1590]	val-auc:0.966985	train-auc:0.993501
+[1600]	val-auc:0.966986	train-auc:0.993573
+[1610]	val-auc:0.966987	train-auc:0.993686
+[1620]	val-auc:0.966986	train-auc:0.993786
+[1630]	val-auc:0.966988	train-auc:0.993850
+[1640]	val-auc:0.966986	train-auc:0.993917
+[1650]	val-auc:0.966982	train-auc:0.993988
+[1660]	val-auc:0.966984	train-auc:0.994064
+[1670]	val-auc:0.966999	train-auc:0.994154
+[1680]	val-auc:0.967001	train-auc:0.994251
+[1690]	val-auc:0.967006	train-auc:0.994348
+[1700]	val-auc:0.967004	train-auc:0.994413
+[1710]	val-auc:0.966991	train-auc:0.994513
+[1720]	val-auc:0.966992	train-auc:0.994602
+[1730]	val-auc:0.966997	train-auc:0.994700
+[1740]	val-auc:0.966999	train-auc:0.994779
+[1750]	val-auc:0.967003	train-auc:0.994856
+[1760]	val-auc:0.967008	train-auc:0.994924
+[1770]	val-auc:0.967006	train-auc:0.994998
+[1780]	val-auc:0.967006	train-auc:0.995065
+[1790]	val-auc:0.967010	train-auc:0.995138
+[1800]	val-auc:0.967013	train-auc:0.995191
+[1810]	val-auc:0.967001	train-auc:0.995250
+[1820]	val-auc:0.967004	train-auc:0.995311
+[1830]	val-auc:0.967005	train-auc:0.995400
+[1840]	val-auc:0.967004	train-auc:0.995467
+[1850]	val-auc:0.967003	train-auc:0.995518
+[1860]	val-auc:0.967009	train-auc:0.995581
+[1870]	val-auc:0.967005	train-auc:0.995650
+[1880]	val-auc:0.966991	train-auc:0.995725
+[1890]	val-auc:0.966995	train-auc:0.995779
+[1900]	val-auc:0.967000	train-auc:0.995847
+[1910]	val-auc:0.966996	train-auc:0.995927
+[1920]	val-auc:0.967003	train-auc:0.995983
+[1930]	val-auc:0.967007	train-auc:0.996065
+[1940]	val-auc:0.967004	train-auc:0.996135
+[1950]	val-auc:0.967006	train-auc:0.996207
+[1960]	val-auc:0.967006	train-auc:0.996271
+[1970]	val-auc:0.967007	train-auc:0.996335
+[1980]	val-auc:0.967004	train-auc:0.996406
+[1990]	val-auc:0.966999	train-auc:0.996467
+[2000]	val-auc:0.967002	train-auc:0.996533
+[2010]	val-auc:0.967004	train-auc:0.996610
+[2020]	val-auc:0.966998	train-auc:0.996663
+[2030]	val-auc:0.966990	train-auc:0.996727
+[2040]	val-auc:0.966976	train-auc:0.996780
+[2050]	val-auc:0.966977	train-auc:0.996854
+[2060]	val-auc:0.966971	train-auc:0.996937
+[2070]	val-auc:0.966962	train-auc:0.997002
+[2080]	val-auc:0.966957	train-auc:0.997047
+[2090]	val-auc:0.966956	train-auc:0.997121
+[2100]	val-auc:0.966956	train-auc:0.997168
+[2110]	val-auc:0.966955	train-auc:0.997212
+[2120]	val-auc:0.966950	train-auc:0.997267
+[2130]	val-auc:0.966949	train-auc:0.997313
+[2140]	val-auc:0.966953	train-auc:0.997349
+[2150]	val-auc:0.966951	train-auc:0.997375
+[2160]	val-auc:0.966937	train-auc:0.997430
+[2170]	val-auc:0.966936	train-auc:0.997476
+[2180]	val-auc:0.966935	train-auc:0.997508
+[2190]	val-auc:0.966934	train-auc:0.997562
+[2200]	val-auc:0.966941	train-auc:0.997606
+[2210]	val-auc:0.966941	train-auc:0.997637
+[2220]	val-auc:0.966930	train-auc:0.997688
+[2230]	val-auc:0.966934	train-auc:0.997737
+[2240]	val-auc:0.966935	train-auc:0.997789
+[2250]	val-auc:0.966937	train-auc:0.997834
+[2260]	val-auc:0.966935	train-auc:0.997879
+[2270]	val-auc:0.966932	train-auc:0.997926
+[2280]	val-auc:0.966927	train-auc:0.997961
+[2290]	val-auc:0.966922	train-auc:0.997998
+[2300]	val-auc:0.966924	train-auc:0.998040
+[2310]	val-auc:0.966926	train-auc:0.998080
+[2320]	val-auc:0.966923	train-auc:0.998121
+[2330]	val-auc:0.966922	train-auc:0.998160
+[2340]	val-auc:0.966920	train-auc:0.998185
+[2350]	val-auc:0.966923	train-auc:0.998215
+[2360]	val-auc:0.966917	train-auc:0.998257
+[2370]	val-auc:0.966918	train-auc:0.998295
+[2380]	val-auc:0.966910	train-auc:0.998338
+[2390]	val-auc:0.966906	train-auc:0.998363
+[2400]	val-auc:0.966905	train-auc:0.998392
+[2410]	val-auc:0.966902	train-auc:0.998423
+[2420]	val-auc:0.966897	train-auc:0.998451
+[2430]	val-auc:0.966894	train-auc:0.998492
+[2440]	val-auc:0.966893	train-auc:0.998518
+[2450]	val-auc:0.966887	train-auc:0.998542
+[2460]	val-auc:0.966873	train-auc:0.998566
+[2470]	val-auc:0.966870	train-auc:0.998593
+[2480]	val-auc:0.966869	train-auc:0.998620
+[2490]	val-auc:0.966860	train-auc:0.998647
+[2500]	val-auc:0.966854	train-auc:0.998676
+[2510]	val-auc:0.966847	train-auc:0.998704
+[2520]	val-auc:0.966845	train-auc:0.998733
+[2530]	val-auc:0.966845	train-auc:0.998756
+[2540]	val-auc:0.966841	train-auc:0.998776
+[2550]	val-auc:0.966834	train-auc:0.998805
+[2560]	val-auc:0.966827	train-auc:0.998833
+[2570]	val-auc:0.966820	train-auc:0.998859
+[2580]	val-auc:0.966810	train-auc:0.998888
+[2590]	val-auc:0.966807	train-auc:0.998918
+[2600]	val-auc:0.966788	train-auc:0.998946
+[2610]	val-auc:0.966786	train-auc:0.998976
+[2620]	val-auc:0.966784	train-auc:0.998998
+[2630]	val-auc:0.966780	train-auc:0.999026
+[2640]	val-auc:0.966777	train-auc:0.999052
+[2650]	val-auc:0.966777	train-auc:0.999071
+[2660]	val-auc:0.966780	train-auc:0.999093
+[2670]	val-auc:0.966774	train-auc:0.999114
+[2680]	val-auc:0.966767	train-auc:0.999135
+[2690]	val-auc:0.966763	train-auc:0.999153
+[2700]	val-auc:0.966749	train-auc:0.999177
+[2710]	val-auc:0.966747	train-auc:0.999194
+[2720]	val-auc:0.966747	train-auc:0.999218
+[2730]	val-auc:0.966731	train-auc:0.999237
+[2740]	val-auc:0.966725	train-auc:0.999255
+[2750]	val-auc:0.966730	train-auc:0.999272
+[2760]	val-auc:0.966729	train-auc:0.999289
+[2770]	val-auc:0.966724	train-auc:0.999307
+[2780]	val-auc:0.966728	train-auc:0.999327
+[2790]	val-auc:0.966728	train-auc:0.999345
+[2800]	val-auc:0.966730	train-auc:0.999363
+[2810]	val-auc:0.966725	train-auc:0.999382
+[2820]	val-auc:0.966720	train-auc:0.999396
+[2830]	val-auc:0.966719	train-auc:0.999405
+[2840]	val-auc:0.966712	train-auc:0.999424
+[2850]	val-auc:0.966710	train-auc:0.999441
+[2860]	val-auc:0.966707	train-auc:0.999451
+[2870]	val-auc:0.966705	train-auc:0.999462
+[2880]	val-auc:0.966700	train-auc:0.999471
+
+Timing stopped at: 27914.98 72.43 7705.28 
+> param <- list(  objective         = "binary:logistic", 
++                 booster           = "gbtree",
++                 eval_metric       = "auc",
++                 eta                  = 0.02, # 0.06, #0.01,
++                 max_depth           = 10 #changed from default of 8
++                 #subsample           = 0.83, # 0.7
++                 #colsample_bytree    = 0.77 # 0.7
++                 #num_parallel_tree   = 2
++                 # alpha = 0.0001, 
++                 # lambda = 1
++ )
+> 
+> system.time(clf <- xgb.train(   params              = param, 
++                                 data                = dtrain, 
++                                 nrounds             = 6000, 
++                                 verbose             = 1,  #1
++                                 #early.stop.round    = 150,
++                                 print.every.n       = 10,
++                                 watchlist           = watchlist,
++                                 maximize            = FALSE
++ )
++ )
+[0]	val-auc:0.949391	train-auc:0.951196
+[10]	val-auc:0.954632	train-auc:0.956203
+[20]	val-auc:0.955446	train-auc:0.957077
+[30]	val-auc:0.956052	train-auc:0.957938
+[40]	val-auc:0.957091	train-auc:0.959198
+[50]	val-auc:0.957711	train-auc:0.960120
+[60]	val-auc:0.958179	train-auc:0.961042
+[70]	val-auc:0.958633	train-auc:0.962073
+[80]	val-auc:0.959291	train-auc:0.963125
+[90]	val-auc:0.959885	train-auc:0.964027
+[100]	val-auc:0.960305	train-auc:0.964820
+[110]	val-auc:0.960664	train-auc:0.965486
+[120]	val-auc:0.960922	train-auc:0.966057
+[130]	val-auc:0.961204	train-auc:0.966614
+[140]	val-auc:0.961497	train-auc:0.967165
+[150]	val-auc:0.961767	train-auc:0.967663
+[160]	val-auc:0.961995	train-auc:0.968137
+[170]	val-auc:0.962134	train-auc:0.968576
+[180]	val-auc:0.962333	train-auc:0.969087
+[190]	val-auc:0.962527	train-auc:0.969470
+[200]	val-auc:0.962761	train-auc:0.969887
+[210]	val-auc:0.962965	train-auc:0.970264
+[220]	val-auc:0.963204	train-auc:0.970694
+[230]	val-auc:0.963373	train-auc:0.971030
+[240]	val-auc:0.963575	train-auc:0.971367
+[250]	val-auc:0.963796	train-auc:0.971799
+[260]	val-auc:0.964000	train-auc:0.972253
+[270]	val-auc:0.964197	train-auc:0.972752
+[280]	val-auc:0.964344	train-auc:0.973303
+[290]	val-auc:0.964482	train-auc:0.973794
+[300]	val-auc:0.964647	train-auc:0.974424
+[310]	val-auc:0.964775	train-auc:0.974992
+[320]	val-auc:0.964919	train-auc:0.975581
+[330]	val-auc:0.965040	train-auc:0.976143
+[340]	val-auc:0.965166	train-auc:0.976683
+[350]	val-auc:0.965307	train-auc:0.977202
+[360]	val-auc:0.965418	train-auc:0.977721
+[370]	val-auc:0.965543	train-auc:0.978349
+[380]	val-auc:0.965624	train-auc:0.978981
+[390]	val-auc:0.965734	train-auc:0.979604
+[400]	val-auc:0.965790	train-auc:0.980343
+[410]	val-auc:0.965862	train-auc:0.980994
+[420]	val-auc:0.965910	train-auc:0.981649
+[430]	val-auc:0.965975	train-auc:0.982186
+[440]	val-auc:0.966033	train-auc:0.982804
+[450]	val-auc:0.966086	train-auc:0.983295
+[460]	val-auc:0.966137	train-auc:0.983715
+[470]	val-auc:0.966213	train-auc:0.984222
+[480]	val-auc:0.966241	train-auc:0.984688
+[490]	val-auc:0.966282	train-auc:0.985115
+[500]	val-auc:0.966335	train-auc:0.985547
+[510]	val-auc:0.966347	train-auc:0.985998
+[520]	val-auc:0.966380	train-auc:0.986418
+[530]	val-auc:0.966412	train-auc:0.986716
+[540]	val-auc:0.966459	train-auc:0.987084
+[550]	val-auc:0.966493	train-auc:0.987496
+[560]	val-auc:0.966524	train-auc:0.987839
+[570]	val-auc:0.966587	train-auc:0.988198
+[580]	val-auc:0.966611	train-auc:0.988596
+[590]	val-auc:0.966646	train-auc:0.988839
+[600]	val-auc:0.966682	train-auc:0.989026
+[610]	val-auc:0.966698	train-auc:0.989336
+[620]	val-auc:0.966730	train-auc:0.989701
+[630]	val-auc:0.966727	train-auc:0.989966
+[640]	val-auc:0.966733	train-auc:0.990203
+[650]	val-auc:0.966735	train-auc:0.990482
+[660]	val-auc:0.966759	train-auc:0.990716
+[670]	val-auc:0.966755	train-auc:0.990930
+[680]	val-auc:0.966762	train-auc:0.991187
+[690]	val-auc:0.966788	train-auc:0.991498
+[700]	val-auc:0.966771	train-auc:0.991709
+[710]	val-auc:0.966805	train-auc:0.991897
+[720]	val-auc:0.966808	train-auc:0.992044
+[730]	val-auc:0.966828	train-auc:0.992204
+[740]	val-auc:0.966834	train-auc:0.992538
+[750]	val-auc:0.966851	train-auc:0.992771
+[760]	val-auc:0.966879	train-auc:0.993033
+[770]	val-auc:0.966909	train-auc:0.993255
+[780]	val-auc:0.966924	train-auc:0.993488
+[790]	val-auc:0.966930	train-auc:0.993684
+[800]	val-auc:0.966932	train-auc:0.993839
+[810]	val-auc:0.966933	train-auc:0.994048
+[820]	val-auc:0.966946	train-auc:0.994214
+[830]	val-auc:0.966954	train-auc:0.994350
+[840]	val-auc:0.966969	train-auc:0.994546
+[850]	val-auc:0.966959	train-auc:0.994664
+[860]	val-auc:0.966959	train-auc:0.994807
+[870]	val-auc:0.966965	train-auc:0.994990
+[880]	val-auc:0.966974	train-auc:0.995205
+[890]	val-auc:0.966973	train-auc:0.995294
+[900]	val-auc:0.966980	train-auc:0.995424
+[910]	val-auc:0.966973	train-auc:0.995538
+[920]	val-auc:0.966980	train-auc:0.995695
+[930]	val-auc:0.966968	train-auc:0.995870
+[940]	val-auc:0.966961	train-auc:0.996030
+[950]	val-auc:0.966956	train-auc:0.996191
+[960]	val-auc:0.966958	train-auc:0.996288
+[970]	val-auc:0.966949	train-auc:0.996392
+[980]	val-auc:0.966949	train-auc:0.996489
+[990]	val-auc:0.966927	train-auc:0.996609
+[1000]	val-auc:0.966935	train-auc:0.996746
+[1010]	val-auc:0.966933	train-auc:0.996860
+[1020]	val-auc:0.966933	train-auc:0.996967
+[1030]	val-auc:0.966928	train-auc:0.997085
+[1040]	val-auc:0.966936	train-auc:0.997196
+[1050]	val-auc:0.966945	train-auc:0.997280
+[1060]	val-auc:0.966919	train-auc:0.997393
+[1070]	val-auc:0.966899	train-auc:0.997510
+[1080]	val-auc:0.966891	train-auc:0.997617
+[1090]	val-auc:0.966893	train-auc:0.997733
+[1100]	val-auc:0.966893	train-auc:0.997840
+[1110]	val-auc:0.966891	train-auc:0.997939
+[1120]	val-auc:0.966890	train-auc:0.998032
+[1130]	val-auc:0.966878	train-auc:0.998105
+[1140]	val-auc:0.966871	train-auc:0.998162
+[1150]	val-auc:0.966856	train-auc:0.998243
+[1160]	val-auc:0.966851	train-auc:0.998326
+[1170]	val-auc:0.966843	train-auc:0.998387
+[1180]	val-auc:0.966840	train-auc:0.998446
+[1190]	val-auc:0.966832	train-auc:0.998513
+[1200]	val-auc:0.966838	train-auc:0.998578
+[1210]	val-auc:0.966839	train-auc:0.998639
+[1220]	val-auc:0.966820	train-auc:0.998706
+[1230]	val-auc:0.966826	train-auc:0.998752
+[1240]	val-auc:0.966820	train-auc:0.998822
+[1250]	val-auc:0.966805	train-auc:0.998862
+[1260]	val-auc:0.966797	train-auc:0.998897
+[1270]	val-auc:0.966785	train-auc:0.998960
+[1280]	val-auc:0.966769	train-auc:0.999013
+[1290]	val-auc:0.966761	train-auc:0.999072
+[1300]	val-auc:0.966758	train-auc:0.999105
+[1310]	val-auc:0.966747	train-auc:0.999148
+[1320]	val-auc:0.966727	train-auc:0.999177
+[1330]	val-auc:0.966709	train-auc:0.999202
+[1340]	val-auc:0.966696	train-auc:0.999246
+[1350]	val-auc:0.966677	train-auc:0.999284
+[1360]	val-auc:0.966667	train-auc:0.999313
+[1370]	val-auc:0.966649	train-auc:0.999357
+[1380]	val-auc:0.966648	train-auc:0.999385
+[1390]	val-auc:0.966644	train-auc:0.999416
+[1400]	val-auc:0.966645	train-auc:0.999439
+[1410]	val-auc:0.966636	train-auc:0.999457
+[1420]	val-auc:0.966621	train-auc:0.999484
+[1430]	val-auc:0.966608	train-auc:0.999511
+[1440]	val-auc:0.966603	train-auc:0.999530
+[1450]	val-auc:0.966599	train-auc:0.999546
+[1460]	val-auc:0.966583	train-auc:0.999573
+[1470]	val-auc:0.966572	train-auc:0.999598
+[1480]	val-auc:0.966566	train-auc:0.999614
+[1490]	val-auc:0.966566	train-auc:0.999634
+[1500]	val-auc:0.966550	train-auc:0.999651
+[1510]	val-auc:0.966539	train-auc:0.999668
+[1520]	val-auc:0.966541	train-auc:0.999686
+[1530]	val-auc:0.966556	train-auc:0.999704
+[1540]	val-auc:0.966556	train-auc:0.999720
+[1550]	val-auc:0.966549	train-auc:0.999735
+[1560]	val-auc:0.966564	train-auc:0.999748
+[1570]	val-auc:0.966560	train-auc:0.999759
+[1580]	val-auc:0.966554	train-auc:0.999774
+[1590]	val-auc:0.966561	train-auc:0.999787
+[1600]	val-auc:0.966557	train-auc:0.999802
+[1610]	val-auc:0.966542	train-auc:0.999814
+[1620]	val-auc:0.966538	train-auc:0.999824
+[1630]	val-auc:0.966511	train-auc:0.999835
+[1640]	val-auc:0.966502	train-auc:0.999842
+[1650]	val-auc:0.966502	train-auc:0.999852
+[1660]	val-auc:0.966507	train-auc:0.999859
+[1670]	val-auc:0.966505	train-auc:0.999864
+[1680]	val-auc:0.966509	train-auc:0.999874
+[1690]	val-auc:0.966499	train-auc:0.999880
+[1700]	val-auc:0.966504	train-auc:0.999888
+[1710]	val-auc:0.966498	train-auc:0.999896
+[1720]	val-auc:0.966480	train-auc:0.999901
+[1730]	val-auc:0.966473	train-auc:0.999907
+[1740]	val-auc:0.966470	train-auc:0.999911
+[1750]	val-auc:0.966464	train-auc:0.999917
+[1760]	val-auc:0.966458	train-auc:0.999921
+[1770]	val-auc:0.966455	train-auc:0.999925
+[1780]	val-auc:0.966449	train-auc:0.999929
+[1790]	val-auc:0.966450	train-auc:0.999933
+[1800]	val-auc:0.966445	train-auc:0.999937
+[1810]	val-auc:0.966446	train-auc:0.999941
+[1820]	val-auc:0.966450	train-auc:0.999945
+[1830]	val-auc:0.966446	train-auc:0.999949
+[1840]	val-auc:0.966430	train-auc:0.999952
+[1850]	val-auc:0.966427	train-auc:0.999955
+[1860]	val-auc:0.966421	train-auc:0.999959
+[1870]	val-auc:0.966419	train-auc:0.999962
+[1880]	val-auc:0.966408	train-auc:0.999964
+[1890]	val-auc:0.966402	train-auc:0.999966
+[1900]	val-auc:0.966394	train-auc:0.999969
+[1910]	val-auc:0.966389	train-auc:0.999972
+[1920]	val-auc:0.966368	train-auc:0.999973
+[1930]	val-auc:0.966358	train-auc:0.999976
+[1940]	val-auc:0.966364	train-auc:0.999978
+[1950]	val-auc:0.966362	train-auc:0.999979
+[1960]	val-auc:0.966343	train-auc:0.999980
+[1970]	val-auc:0.966341	train-auc:0.999982
+[1980]	val-auc:0.966339	train-auc:0.999982
+[1990]	val-auc:0.966332	train-auc:0.999984
+[2000]	val-auc:0.966321	train-auc:0.999985
+[2010]	val-auc:0.966322	train-auc:0.999986
+[2020]	val-auc:0.966313	train-auc:0.999987
+[2030]	val-auc:0.966310	train-auc:0.999988
+[2040]	val-auc:0.966322	train-auc:0.999989
+[2050]	val-auc:0.966313	train-auc:0.999990
+[2060]	val-auc:0.966304	train-auc:0.999991
+[2070]	val-auc:0.966298	train-auc:0.999992
+[2080]	val-auc:0.966298	train-auc:0.999992
+[2090]	val-auc:0.966300	train-auc:0.999993
+[2100]	val-auc:0.966308	train-auc:0.999994
+[2110]	val-auc:0.966310	train-auc:0.999994
+[2120]	val-auc:0.966299	train-auc:0.999995
+[2130]	val-auc:0.966293	train-auc:0.999995
+[2140]	val-auc:0.966293	train-auc:0.999995
+[2150]	val-auc:0.966293	train-auc:0.999996
+[2160]	val-auc:0.966277	train-auc:0.999996
+[2170]	val-auc:0.966280	train-auc:0.999996
+[2180]	val-auc:0.966274	train-auc:0.999997
+[2190]	val-auc:0.966277	train-auc:0.999997
+[2200]	val-auc:0.966274	train-auc:0.999997
+[2210]	val-auc:0.966264	train-auc:0.999997
+
+Timing stopped at: 20630.5 53.41 5462.9 
+
+=========eta=0.02, m.depth=6, rounds=6k
+[0]	val-auc:0.925810	train-auc:0.925611
+[10]	val-auc:0.929774	train-auc:0.929621
+[20]	val-auc:0.938252	train-auc:0.937902
+
+[300]	val-auc:0.960795	train-auc:0.962363
+[310]	val-auc:0.961107	train-auc:0.962762
+[320]	val-auc:0.961448	train-auc:0.963234
+[330]	val-auc:0.961658	train-auc:0.963556
+[340]	val-auc:0.961864	train-auc:0.963905
+[350]	val-auc:0.962049	train-auc:0.964188
+[360]	val-auc:0.962257	train-auc:0.964517
+[370]	val-auc:0.962435	train-auc:0.964850
+[380]	val-auc:0.962590	train-auc:0.965132
+[390]	val-auc:0.962773	train-auc:0.965418
+[400]	val-auc:0.962940	train-auc:0.965682
+
+[1160]	val-auc:0.966494	train-auc:0.977344
+[1170]	val-auc:0.966512	train-auc:0.977446
+[1180]	val-auc:0.966513	train-auc:0.977527
+[1190]	val-auc:0.966532	train-auc:0.977637
+[1200]	val-auc:0.966534	train-auc:0.977733
+[1210]	val-auc:0.966552	train-auc:0.977846
+[1220]	val-auc:0.966566	train-auc:0.977963
+[1230]	val-auc:0.966576	train-auc:0.978064
+
+[2120]	val-auc:0.967205	train-auc:0.985456
+[2130]	val-auc:0.967219	train-auc:0.985524
+[2140]	val-auc:0.967218	train-auc:0.985611
+[2150]	val-auc:0.967215	train-auc:0.985696
+[2160]	val-auc:0.967227	train-auc:0.985768
+[2170]	val-auc:0.967233	train-auc:0.985840
+[2180]	val-auc:0.967235	train-auc:0.985920
+[2190]	val-auc:0.967243	train-auc:0.986004
+[2200]	val-auc:0.967239	train-auc:0.986084
+[2210]	val-auc:0.967234	train-auc:0.986140
+[2220]	val-auc:0.967223	train-auc:0.986215
+[2230]	val-auc:0.967219	train-auc:0.986261
+
+[2490]	val-auc:0.967256	train-auc:0.987909
+[2500]	val-auc:0.967263	train-auc:0.987989
+[2510]	val-auc:0.967261	train-auc:0.988035
+[2520]	val-auc:0.967257	train-auc:0.988075
+
+
+
+
+
+[3000]	val-auc:0.967246	train-auc:0.990686
+[3010]	val-auc:0.967245	train-auc:0.990720
+[3020]	val-auc:0.967239	train-auc:0.990779
+[3030]	val-auc:0.967224	train-auc:0.990816
+[3040]	val-auc:0.967219	train-auc:0.990866
+[3050]	val-auc:0.967205	train-auc:0.990920
+[3060]	val-auc:0.967197	train-auc:0.990976
+[3070]	val-auc:0.967194	train-auc:0.991040
+[3080]	val-auc:0.967200	train-auc:0.991099
+[3090]	val-auc:0.967195	train-auc:0.991168
+[3100]	val-auc:0.967200	train-auc:0.991207
+[3110]	val-auc:0.967199	train-auc:0.991265
+[3120]	val-auc:0.967202	train-auc:0.991309
+[3130]	val-auc:0.967198	train-auc:0.991354
+
+[3670]	val-auc:0.967083	train-auc:0.993543
+
+Timing stopped at: 20305.44 35.6 5525.79 
+
+
+=============max test AUC ~ .9672
+
+
+next iteration = with sub-sample set(earlier unused)=0.80, etc..
+                eta                  = 0.02, # 0.06, #0.01,
+                max_depth           = 6, #changed from default of 8
+                subsample           = 0.80 # 0.83, # 0.7
+				
+===
+
+[0]	val-auc:0.926501	train-auc:0.926179
+[10]	val-auc:0.935093	train-auc:0.935100
+[20]	val-auc:0.938372	train-auc:0.938705
+[30]	val-auc:0.939262	train-auc:0.939347
+[40]	val-auc:0.942263	train-auc:0.942145
+
+....
+
+[1400]	val-auc:0.967183	train-auc:0.982414
+[1410]	val-auc:0.967191	train-auc:0.982528
+[1420]	val-auc:0.967209	train-auc:0.982648
+[1430]	val-auc:0.967204	train-auc:0.982754
+[1440]	val-auc:0.967207	train-auc:0.982857
+[1450]	val-auc:0.967213	train-auc:0.982971
+[1460]	val-auc:0.967213	train-auc:0.983082
+[1470]	val-auc:0.967216	train-auc:0.983180
+
+...
+
+[1620]	val-auc:0.967358	train-auc:0.984688
+[1630]	val-auc:0.967367	train-auc:0.984794
+[1640]	val-auc:0.967380	train-auc:0.984881
+[1650]	val-auc:0.967389	train-auc:0.984964
+[1660]	val-auc:0.967392	train-auc:0.985044
+[1670]	val-auc:0.967395	train-auc:0.985131
+[1680]	val-auc:0.967397	train-auc:0.985224
+[1690]	val-auc:0.967390	train-auc:0.985319
+[1700]	val-auc:0.967395	train-auc:0.985415
+[1710]	val-auc:0.967415	train-auc:0.985517
+
+...
+[1860]	val-auc:0.967546	train-auc:0.986882
+[1870]	val-auc:0.967561	train-auc:0.986966
+[1880]	val-auc:0.967561	train-auc:0.987046
+[1890]	val-auc:0.967565	train-auc:0.987127
+[1900]	val-auc:0.967573	train-auc:0.987224
+
+[2060]	val-auc:0.967634	train-auc:0.988464
+[2070]	val-auc:0.967636	train-auc:0.988546
+[2080]	val-auc:0.967634	train-auc:0.988632
+[2090]	val-auc:0.967632	train-auc:0.988717
+...
+
+[2260]	val-auc:0.967642	train-auc:0.989986
+[2270]	val-auc:0.967646	train-auc:0.990051
+[2280]	val-auc:0.967651	train-auc:0.990118
+[2290]	val-auc:0.967651	train-auc:0.990187
+[2300]	val-auc:0.967652	train-auc:0.990252
+[2310]	val-auc:0.967657	train-auc:0.990304
+[2320]	val-auc:0.967657	train-auc:0.990383
+[2330]	val-auc:0.967648	train-auc:0.990440
+[2340]	val-auc:0.967648	train-auc:0.990493
+[2350]	val-auc:0.967648	train-auc:0.990546
+[2360]	val-auc:0.967646	train-auc:0.990605
+[2370]	val-auc:0.967645	train-auc:0.990666
+[2380]	val-auc:0.967641	train-auc:0.990733
+...
+
+[3940]	val-auc:0.967478	train-auc:0.997037
+[3950]	val-auc:0.967472	train-auc:0.997055
+[3960]	val-auc:0.967474	train-auc:0.997078
+[3970]	val-auc:0.967471	train-auc:0.997102
+[3980]	val-auc:0.967472	train-auc:0.997127
+[3990]	val-auc:0.967462	train-auc:0.997152
+    user   system  elapsed 
+22538.04    40.16  6045.35 
+
+
+max AUC achieved : .9676
+
+=========with subsample = .70
+
+                eta                  = 0.02, # 0.06, #0.01,
+                max_depth           = 6, #changed from default of 8
+                subsample           = 0.70 # 0.83, # 0.7
+
+[2320]	val-auc:0.967459	train-auc:0.990444
+[2330]	val-auc:0.967461	train-auc:0.990510
+[2340]	val-auc:0.967467	train-auc:0.990581
+[2350]	val-auc:0.967463	train-auc:0.990644
+[2360]	val-auc:0.967468	train-auc:0.990709
+[2370]	val-auc:0.967465	train-auc:0.990770
+[2380]	val-auc:0.967472	train-auc:0.990829
+[2390]	val-auc:0.967474	train-auc:0.990897
+[2400]	val-auc:0.967468	train-auc:0.990953
+
+
+				
+best score: [2210]	val-auc:0.967479	train-auc:0.989690
+
+
+
+
+
+====subsample =.7, colsample_bytree=.70
+[2240]	val-auc:0.967479	train-auc:0.989272
+[2250]	val-auc:0.967471	train-auc:0.989334
+[2260]	val-auc:0.967491	train-auc:0.989401
+[2270]	val-auc:0.967491	train-auc:0.989458
+[2280]	val-auc:0.967501	train-auc:0.989520
+[2290]	val-auc:0.967497	train-auc:0.989581
+[2300]	val-auc:0.967498	train-auc:0.989655
+[2310]	val-auc:0.967494	train-auc:0.989729
+[2320]	val-auc:0.967483	train-auc:0.989802
+
+best AUC = .967501
+
+
+
+====subsample =.7, colsample_bytree=.70, eta=.01
+
+[2840]	val-auc:0.967168	train-auc:0.982030
+[2850]	val-auc:0.967175	train-auc:0.982085
+[2860]	val-auc:0.967184	train-auc:0.982140
+[2870]	val-auc:0.967199	train-auc:0.982203
+[2880]	val-auc:0.967200	train-auc:0.982252
+[2890]	val-auc:0.967200	train-auc:0.982295
+[2900]	val-auc:0.967212	train-auc:0.982351
+
+
+
+
+
+
+best AUC score: 
+[5370]	val-auc:0.967588	train-auc:0.991918
+
+
+=============
+                eta                  = 0.01, # 0.06, #0.01,
+                max_depth           = 6, #changed from default of 8
+                subsample           = 0.83, # 0.83, # 0.7
+                colsample_bytree    = 0.9, # 0.7
+                min_child_weight    = 3
+				
+				
+				
+[4890]	val-auc:0.967747	train-auc:0.989831
+[4900]	val-auc:0.967750	train-auc:0.989864
+[4910]	val-auc:0.967751	train-auc:0.989890
+[4920]	val-auc:0.967749	train-auc:0.989923
+
+[5450]	val-auc:0.967748	train-auc:0.991444
+[5460]	val-auc:0.967750	train-auc:0.991469
+[5470]	val-auc:0.967747	train-auc:0.991495
+[5480]	val-auc:0.967740	train-auc:0.991521
+[5490]	val-auc:0.967738	train-auc:0.991547
+
+
+max AUC = .967751
+==========
+
+
+
+max AUC: .9674
+[1000]	val-auc:0.967439	train-auc:0.987624
