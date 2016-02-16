@@ -1,0 +1,19 @@
+https://www.kaggle.com/c/prudential-life-insurance-assessment/forums/t/17829/non-xgboost-success
+
+Something that worked for me (~63%) is building multiple classifiers the following way :
+
+Start predicting Response =1, then Response = 1 or 2, then Response = 1, 2 or 3 ... to Response = 1,2,3,4,5,6,7 or 8,
+Build a classifier to predict the probability for every possibilities then substract them to obtain the probability for Response=1 to happen, then Response=2 to happen ... etc.
+Select the highest probability
+For the Response = 1,2,3,4,5,6,7 or 8, you should get a probability=1 everywhere.
+
+This way, you will take in count that responses are ordered in your classification. I used Random Forests but you can try an another model.
+
+=============
+Q:I know you can get the prediction probabilities from the randomForest package to get Respose =1 , Response = 2, Response = 3, etc. Did you do single run and then add the probabilities to get the probabilities for Response =1 or 2 etc? Or did you do something like encode the Response variable if they were either 1 or not one and then build a model. Then build a model to encoding the response variable if they were either 1 or 2 as 1 and then building another model to get the probabilities.
+
+A:I encoded the list 8 times this way and used 8 models. In scikit-learn, you have a function "predict proba" to know the probability to get a 1 or 0 for example.
+
+Then, to get P(Response=8), you calculate P(Response=8) = P(Response=1,2,3,4,5,6,7,8) - P(Response=1,2,3,4,5,6,7), then P(Response=7) = P(Response=1,2,3,4,5,6,7) - P(Response=1,2,3,4,5,6) ... to P(Response=1) = P(Response=2) - P(Response=1,2).
+
+============
