@@ -1,0 +1,56 @@
+https://www.kaggle.com/c/prudential-life-insurance-assessment/forums/t/18996/solution-and-experience-sharing-4th-place-should-have-been-2nd
+
+This competition has been full of learning experiences. For me, it was a mistake made on the second to last submission resulting in a coin-flip decision for my last submission and the subsequent loss of 2 positions plus $10000. Like a lot of other people here, I started this competition about 10 days before the end of the Homesite competition and ramped up the intensity over time. Below I describe my solution and some learning experiences.
+
+1. The public LB was severely overfit
+
+Everyone should have known this, but I will go into some more detail. First of all, the complete test set was 19765 observations, and it's further exacerbated by the fact that only about 30% of that (~5900 observations) were used to calculate the public LB. What made the overfitting worse is that the Kappa score heavily punishes extreme errors (e.g., prediction risk = 8 for when actual risk = 1) and this competition is filled with a ton of them. Finally, when the best public LB test script was scoring ~0.004 better than my best reg:linear xgboost model but was ~0.004 worse in my 5-fold CV score, it was clear that the public LB could not be trusted, and that even a huge gain in the public LB when there's no gain in CV should not be used.
+
+2. Relying solely on the CV score was not necessarily ideal either
+
+I only found this out as I was checking submission scores to compile this post. Some of the models that performed better in my CV actually performed worse in the private LB and vice versa. I used 5-fold CV by simply cutting out five similarly sized chunks from the training data. Would 10-fold and/or stratified CV have been more accurate?
+
+3. Ensembling models gets you very, very, far
+
+My final solution consists of 16 different xgboost models which uses 4 different methods crossed with 2 different feature engineering methods (taken directly from the public scripts) and 2 different post-processing methods (optimizing offsets and optimizing cutoffs). The methods are:
+
+reg:linear objective - linear regression works quite well.
+count:poisson objective - also works quite well since response variable is count from 1 to 8.
+multi:softmax objective, then multiplied the probabilities by the category values (1, 2, 3, ..., 8) to get a continuous value.
+personally developed method (I won't discuss this as it's mostly intuition and heuristics). This was my best performing method.
+Here are the private LB scores and expected ranks for each of the models:
+
+poisson offset: 0.67242 - 150th
+poisson offset second: 0.66988 - 343rd
+poisson cutoff: 0.67198 - 171st
+poisson cutoff second: 0.67207 - 168th
+linear offset: 0.66936 - 391st
+linear offset second: 0.66714 - 880th
+linear cutoff: 0.67134 - 219th
+linear cutoff second: 0.66854 - 505th
+multi offset: 0.67223 - 159th
+multi offset second: 0.67250 - 143th
+multi cutoff: 0.67203 - 169th
+multi cutoff second: 0.67268 - 130th
+personally developed offset: 0.67604 - 31st
+personally developed offset second: 0.67611 - 28th
+personally developed cutoff: 0.67584 - 32nd
+personally developed cutoff second: 0.67586 - 32nd
+As far as I knew, there were two different ways to ensemble results. One is to use offset/cutoff and rounding on each model and then ensemble the results, and the other is to ensemble the raw predictions and then use offset/cutoff and rounding on the ensemble. The first method worked better for me on the public LB (I know, poor practice) so that's what I stuck with.
+
+Here are the ensemble scores:
+
+poisson only ensemble: 0.67225 - 158th
+linear only ensemble: 0.67201 - 170th
+multi only ensemble: 0.67306 - 118th
+poisson x linear ensemble: 0.67316 - 111st
+multi + poisson + linear ensemble: 0.67622 - 25th
+multi + poisson + linear + personally developed ensemble: 0.67730 - 14th
+weighted multi + poisson + linear + personally developed ensemble: 0.67817 - 6th
+However, to be safe, I also included a solution with the second ensemble into my full ensemble, it improved me to my final private LB score.
+
+4. Unique models can be great
+
+Scirpus' genetic programming model was amazing. I was foolish to not have investigated it earlier, and it went into costing me 2nd place and $10000. My plan was to use my final two submissions as the selected ones, with one of them being my final ensemble and the other one including the GP model into my ensemble. Unfortunately I made a mistake with my second to last submission so I had to scratch my plan and choose one of the two options. Ultimately I chose not to include the GP model because I hadn't tested it in my CV and was afraid that it was overfit like the public scripts. That turned out to be a mistake because including it would have resulted in a private LB score of 0.67936, good for 2nd place. Moral of the story, thoroughly investigate ideas to minimize the guessing!
+
+
