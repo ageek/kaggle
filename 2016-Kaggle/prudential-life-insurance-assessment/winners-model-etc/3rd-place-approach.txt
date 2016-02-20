@@ -37,3 +37,9 @@ submit result
 *Note: Some of the loss functions are custom implementations. For xgboost these are implemented in C++ and for the neural nets they are implemented in either Keras or Lasagne.
 
 idle_speculation's image  idle_speculation  
+========================CV strategy for 3rd place, 6 submissions and 3rd places=======
+I'm sorry to disappoint, but my cross-validation strategy is quite ordinary. I broke the training set into 17 folds, trained on 16 and used the out-of-sample prediction on the remaining fold. Perhaps my conviction that the public leaderboard was unreliable made the difference.
+
+Some monte-carlo simulations of the variance in the demominator of Quadratic Weighted Kappa were what convinced me. I tested sampling at size similar public leaderboard and found the standard deviation in the results was around 1%. That may sound small, but it's the difference between 1st place and 139th place in the final standings.
+
+Since there were obvious differences between the train and test set, I can't really fault anyone for trying to fit the leaderboard. I know that I spent quite a bit of time convincing myself that the training set provided no evidence that the distribution of response in the test set was any different.
