@@ -1,0 +1,75 @@
+#http://blog.kaggle.com/2016/02/10/profiling-top-kagglers-kazanova-new-1-in-the-world/
+
+What is your first plan of action when working on a new competition?
+First of all to understand the problem and the metric we are tested on- this is key.
+To as-soon-as possible create a reliable cross-validation process that best would resemble the leaderboard or the test set in general as this will allow me to explore many different algorithms and approaches, knowing the impact they could yield.
+Understand the importance of different algorithmic families, to see when and where to maximize the intensity (is it a linear or non-linear type of problem?)
+Try many different approaches/techniques on a the given problem and seize it from all possible angles in terms of algorithms 'selection, hyper parameter optimization, feature engineering, missing values' treatment- I treat all these elements as hyper parameters of the final solution.
+What does your iteration cycle look like?
+Sacrifice a couple of submissions in the beginning of the contest to understand the importance of the different algorithms -- save energy for last 100 meters.
+Do the following process for multiple models
+Select a model and do a recursive loop with the following steps:
+Transform data (scaling, log(x+1) values, treat missing values, PCA or none)
+Optimize hyper parameters of the model
+Do feature engineering for that model (as in generate new features)
+Do features' selection for that model (as in reducing them)
+Redo previous steps as optimum parameters are likely to have changed slightly
+Save hold-out predictions to be used later (meta-modelling)
+Check consistency of CV scores with leaderboard. If problematic, re-assess cross-validation process and re-do steps
+Create partnerships. Ideally you look for people that are likely to have taken different approaches than you have. Historically (in contrast) I was looking for friends; people I can learn from and people I can have fun with - not so much winning.
+Find a good way to ensemble
+
+
+===========
+What is your approach to hyper-tuning parameters?
+I do this very manually.
+
+I have only tried once to use something like Gridsearch. I feel I learn more about the algorithms and why they work the way they do by doing this manually. At the same time I feel that "I do something, it's not only the machine!".
+
+After 60+ competitions I've found that I can get to the top 90% of the best hyper parameters with the first try, so the manual approach has paid off!
+
+What is your approach to solid CV/final submission selection and LB fit?
+In regards to CV, I try to best resemble what I am being tested on.
+
+In many situations a random split would not work. For example: In the Acquire valued shoppers' challenge we were mainly tested on different products (offers) than these available on the train set. I made my CV to always try to predict 1 offer using the rest of the offers as this could resemble the test leaderboard better than a random split.
+
+About final selection, I normally go for best Leaderboard submission and best CV submission. In the case of a happy collision, I select something as different as possible with respectable CV result just in case I am lucky!
+
+(A prayer to the god of overfitting is my secret 3rd submission)
+
+In a few words: What wins competitions?
+Understand the problem well
+Discipline ; To have a well-thorough and documented approach that you follow religiously and defines all the modelling process/framework from how you cross-validate, select models, avoids over fitting (which requires a lot of ...discipline).
+Allow room to try problem-specific things or new approaches within that framework
+The hours you put in
+Have access to the right tools
+Make key partnerships
+Ensembling
+================
+How did you get better at Kaggle competitions?
+Did I ?! 😀
+
+I guess what has helped a lot is:
+
+Seeing previous solutions and end-of-competition threads
+Participate in Kaggle forums
+Learn the tools
+Read papers, websites, machine learning tutorials
+Optimize processes (use sparse matrices, cut unnecessary steps, write more efficient code)
+Save everything I've done and reuse (and improve). E.g. I keep a separate folder for each competition I've completed.
+Dedicate time (had to reduce video games)
+Collaborate with others
+I have found the following resources useful:
+
+This benchmark by Paul Duan in the Amazon competition (my first ever attempt with Python) for a general modelling framework.
+From the same competition : Python code to achieve 0.90 AUC with logistic regression from Miroslaw Horbal to create pairwise interactions with cross-validation.
+For text analysis, this benchmark from Abhishek: Beating the benchmark in StumbleUpon Evergreen Challenge
+XGBoost benchmark in Higgs Boson competition by Bing Xu
+Tinrtgu's FTRL Logistic model in Avazu: Beat the benchmark with less than 1MB of memory
+Data science Bowl tutorial for image classification: IPython Notebook Tutorial.
+H2O (R) deep learning benchmark from Arno Candel in Africa Soil competition
+Lasagne and nolearn tutorial for Otto competition (by the admin) :
+Andrew Ng's Coursera course in Machine learning
+University of Utah Machine learning slides.
+Wikipedia and Google
+
