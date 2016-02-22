@@ -1,0 +1,18 @@
+#http://blog.kaggle.com/2016/02/03/rossmann-store-sales-winners-interview-2nd-place-nima-shahbazi/
+
+
+
+==========
+Were you surprised by any of your findings?
+Yes, I always got surprised when even one of my finding showed better performance on the leaderboard. The most important one was when I added four more features for time series analysis. Those were simple moving averages (MA_Fast, MA_Slow, MA_Customer_Fast and MA_Customer_Slow) for sales and customers over different time windows. The moving averages were split by important feature like store number, day of week and promotion. The model I built based on moving averages blended well with my previous model and made my rank 3rd in the last week of the competition.
+
+Which tools did you use?
+For preprocessing and exploratory data analysis I used R and I usually write the code both in R and Python.
+
+How did you spend your time on this competition?
+I spent more than 70% on feature engineering, and 30% on feature selection, model ensembling, and model tuning.
+
+What was the run time for both training and prediction of your winning solution?
+I did not use a super-fast machine. For this competition I used a machine with 8-core CPU and 16GB of RAM. I ran the models in parallel on my laptop and my own desktop computer. When I woke up I started coding and digging into the data, and while I was sleeping I let the computers run my algorithm for model tuning. The winning solution has 15 models which took more than 25 hours to build and predict.
+
+
