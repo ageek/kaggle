@@ -1,0 +1,28 @@
+#https://www.kaggle.com/c/amazon-employee-access-challenge/forums/t/4838/python-code-to-achieve-0-90-auc-with-logistic-regression
+
+I've hit a wall with my current approach to this problem. As such I'd like to perform a little social experiment by seeing how many people are kind enough to join in on a group brainstorming session. So I am posting the code I am currently using that helped my achieve my current position on the leaderboard. You're free to use this code to your hearts content, it's really just an adaptation of Paul Duan's original code with some feature transformations, feature selection, and hyperparameter fitting included. All I ask for in return is that this great community can help me learn. Machine learning is very new to me and I have a lot to learn, I would appreciate it if you kind people would be willing to participate in a little brainstorming session on how this code could possibly be improved upon, or have a discussion on what other feature creation techniques could be used to further improve the performance of this model (or any model really). Even suggestions on coding style would be very much appreciated, I am a pretty big noob at programming, I've only programmed for educational and personal purposes, never in a career environment with peer review so please help me learn! For example, is there ways to make this more modular? More adaptable to other feature engineering techniques? I'd love to hear peoples opinions. 
+
+I also think it would be very fun to light a fire underneath the butts of the people in the higher positions of the leaderboards at my own peril. 
+
+What you'll need to have this run:
+
+Scikit Learn, Pandas, Scipy and the current code assumes the data is located in the same directory as the code. 
+
+Here's a brief overview of my current approach:
+
+Transform the data to higher degree features by considering all pairs and triples of the original data ignoring 'ROLE_CODE'
+Perform a One Hot Encoding on each individual column, but maintain the original transformed feature column that was associated with the encoding
+Perform greedy forward selection on the encoded data by training the model on ever increasing subsets of the original transformed columns so that I am selecting for groups of encoded binary features, not the individual binary feature bits
+Use the selected features to perform hyperparmeter fitting
+Train the full model and predict
+Overall the code takes about 4h to run on my 3GHz system since feature selection is currently a little slow. I know this area could be improved for speed by using other techniques, but I'd like to post what I used to get me where I am right now. So grab yourself a pint and relax if you're brave (or crazy) enough to run this yourself :D 
+
+Have fun, and lets all hopefully learn something new!
+
+EDIT: I noticed the docstrings for the group_data function is a little dated. Sorry about that. 
+
+EDIT 2: The original code had two bugs near the final model training and prediction phase of the code. If you're going to use this, please use logistic_regression_updated.py. Or if you're using the original file, the following changes need to be made:
+
+model.fit(X_train, Y) to model.fit(X_train, y)
+preds = model.predict(X_test)[:,1] to preds = model.predict_proba(X_test)[:,1]
+
